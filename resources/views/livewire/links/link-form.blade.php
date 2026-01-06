@@ -30,7 +30,7 @@ new class extends Component {
     </div>
 
     <div class="space-y-6">
-        <flux:input wire:model.defer="url" icon="link" label="Enter URL to shorten" type="url" placeholder="https://example.com"/>
+        <flux:input wire:model.defer="url" required icon="link" label="Enter URL to shorten" type="url" placeholder="https://example.com"/>
     </div>
 
     <div class="space-y-2">

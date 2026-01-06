@@ -18,8 +18,6 @@ new class extends Component {
     </flux:heading>
 
     <div class="space-y-2">
-{{--        <flux:input value="{{ $shortUrl }}" readonly copyable/>--}}
-
         <label id="shortened-url-text"
                class="text-center border-gray-200 dark:border-gray-200/10 border font-mono [&::selection]:bg-green-200 [&::selection]:text-green-900 text-zinc-500 dark:text-zinc-300 col-span-6 bg-white/10  text-sm rounded-lg block w-full px-2.5 py-4 truncate overflow-hidden">
             {{ $shortUrl }}
@@ -38,6 +36,7 @@ new class extends Component {
         <flux:button
             variant="primary"
             class="w-full"
+            icon="clipboard"
         >
             Copy
         </flux:button>

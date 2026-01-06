@@ -1,6 +1,6 @@
 <x-layouts.public title="Create Message">
     <x-page-container>
-        <div class="mt-16 max-w-xl mx-auto">
+        <div class="max-w-xl mx-auto">
             <flux:card class="space-y-6">
                 <div>
                     <flux:heading size="lg">Create a snippet</flux:heading>
