@@ -1,4 +1,4 @@
-<x-layouts.public title="Welcome">
+<x-layouts.public title="Shorten URL">
     <x-page-container>
         <div class="mt-16 max-w-xl mx-auto">
             <flux:card class="space-y-6">
