@@ -19,10 +19,19 @@ new class extends Component {
 
         try {
             $message = $messageService->create($this->message);
+
+            // TODO Create the shortened link for the message
+            $shortUrl = "helloWorld";
+
         } catch (Exception) {
             session()->flash('error', 'Failed to create message. Please try again.');
             return;
         }
+
+        // Emit the shortened Message event
+        $this->dispatch('message:shortened', [
+            'short_url' => $shortUrl,
+        ]);
 
         // Reset the form
         $this->reset('message');

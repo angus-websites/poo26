@@ -10,6 +10,27 @@ new class extends Component {
      */
     public string $stage = 'form';
 
+    /**
+     * The generated short URL
+     */
+    public ?string $shortUrl = null;
+
+    protected $listeners = [
+        'message:shortened' => 'onMessageShortened',
+        'link:reset' => 'resetFlow',
+    ];
+
+    public function onMessageShortened(array $payload): void
+    {
+        $this->shortUrl = $payload['short_url'] ?? null;
+        $this->stage = 'result';
+    }
+
+    public function resetFlow(): void
+    {
+        $this->reset(['shortUrl']);
+        $this->stage = 'form';
+    }
 };
 ?>
 
@@ -17,6 +38,12 @@ new class extends Component {
 
     @if ($stage === 'form')
         <livewire:messages.message-form/>
+    @elseif($stage === 'result')
+        <livewire:links.link-results
+            :shortUrl="$shortUrl"
+            heading="Your message is ready!"
+            backButtonText="Create another message"
+        />
     @endif
 
 </flux:card>

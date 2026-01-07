@@ -38,9 +38,7 @@ new class extends Component {
 
     @if ($stage === 'form')
         <livewire:links.link-form/>
-    @endif
-
-    @if ($stage === 'result')
+    @elseif($stage === 'result')
         <livewire:links.link-results :shortUrl="$shortUrl"/>
     @endif
 
