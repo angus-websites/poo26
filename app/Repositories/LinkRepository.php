@@ -3,14 +3,15 @@
 namespace App\Repositories;
 
 use App\Contracts\LinkRepositoryInterface;
+use App\Data\LinkData;
 use App\Models\Link;
 use Illuminate\Support\Collection;
 
 class LinkRepository implements LinkRepositoryInterface
 {
-    public function create(array $data): Link
+    public function create(LinkData $data): Link
     {
-        return Link::create($data);
+        return Link::create($data->toArray());
     }
 
     public function findById(int $id): ?Link
@@ -21,7 +22,6 @@ class LinkRepository implements LinkRepositoryInterface
     public function findBySlug(string $slug): ?Link
     {
         return Link::where('slug', $slug)
-            ->where('is_active', true)
             ->first();
     }
 
