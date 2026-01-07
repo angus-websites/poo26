@@ -14,9 +14,10 @@
                 </div>
 
                 <div class="space-y-2">
-                    <flux:button variant="primary" class="w-full">Shorten</flux:button>
+                    <flux:button variant="primary" class="w-full">Get Link</flux:button>
                 </div>
             </flux:card>
+            
         </div>
     </x-page-container>
 </x-layouts.public>
