@@ -18,7 +18,7 @@ new class extends Component {
 
         try {
             // Create the shortened link
-            $linkData = $linkService->create(
+            $link = $linkService->create(
                 originalUrl: $this->url
             );
         } catch (SlugException) {
@@ -28,7 +28,7 @@ new class extends Component {
 
         // Emit the shortened URL event
         $this->dispatch('link:shortened', [
-            'short_url' => $linkData->slug,
+            'short_url' => $link->slug,
         ]);
 
         // Reset the form

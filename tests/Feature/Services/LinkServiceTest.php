@@ -2,8 +2,6 @@
 
 use App\Models\Link;
 use App\Services\LinkService;
-use App\Services\SlugService;
-use App\Contracts\LinkRepositoryInterface;
 use App\Exceptions\InvalidLinkException;
 use Illuminate\Support\Carbon;
 
@@ -15,14 +13,7 @@ use Illuminate\Support\Carbon;
  */
 
 beforeEach(function () {
-    // Create a real repository instance or mock if needed
-    $this->repo = app(LinkRepositoryInterface::class);
-    $this->slugService = app(SlugService::class);
-
-    $this->service = new LinkService(
-        $this->repo,
-        $this->slugService
-    );
+    $this->service = app(LinkService::class);
 });
 
 it('resolves an active link and increments clicks', function () {
