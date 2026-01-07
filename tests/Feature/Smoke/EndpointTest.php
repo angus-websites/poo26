@@ -9,7 +9,8 @@ $publicRoutes = [
 
 it('no smoke for public pages', function () use ($publicRoutes) {
     $pages = visit(array_keys($publicRoutes));
-    $pages->assertNoSmoke();
+    $pages->assertNoSmoke()
+        ->assertNoAccessibilityIssues(0);
 });
 
 it('ensures ui for all routes is unchanged (Desktop)', function () use ($publicRoutes) {
