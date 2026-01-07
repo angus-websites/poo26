@@ -1,38 +1,33 @@
 <?php
 
 
-it('all public GET routes respond with 200', function () {
+$publicRoutes = [
+    "/" => "Home Page",
+    "/messages/create" => "New Message Page",
+    "/snippets/create" => "New Snippet Page",
+];
 
-    $routes = [
-        "/" => "Home Page",
-        "/messages/create" => "New Message Page",
-        "/snippets/create" => "New Snippet Page",
-    ];
-
-    foreach ($routes as $uri => $name) {
-        $response = $this->get($uri);
-
-        if ($response->status() !== 200) {
-            throw new Exception("The route '{$uri}' ({$name}) did not respond with 200 OK");
-        }
-
-        // Assert OK
-        $response->assertOk();
-    }
+it('no smoke for public pages', function () use ($publicRoutes) {
+    $pages = visit(array_keys($publicRoutes));
+    $pages->assertNoSmoke();
 });
 
-it('ensures ui for all routes is unchanged', function () {
-
-    $routes = [
-        "/" => "Home Page",
-        "/messages/create" => "New Message Page",
-        "/snippets/create" => "New Snippet Page",
-    ];
-
-    $pages = visit(
-        array_keys($routes)
-    );
-
+it('ensures ui for all routes is unchanged (Desktop)', function () use ($publicRoutes) {
+    $pages = visit(array_keys($publicRoutes));
     $pages->assertScreenshotMatches();
 });
 
+it('ensures ui for all routes is unchanged (Mobile)', function () use ($publicRoutes) {
+    $pages = visit(array_keys($publicRoutes))->on()->mobile();
+    $pages->assertScreenshotMatches();
+});
+
+it('ensures ui for all routes is unchanged (Desktop, Dark)', function () use ($publicRoutes) {
+    $pages = visit(array_keys($publicRoutes))->on()->inDarkMode();
+    $pages->assertScreenshotMatches();
+});
+
+it('ensures ui for all routes is unchanged (Mobile, Dark)', function () use ($publicRoutes) {
+    $pages = visit(array_keys($publicRoutes))->on()->mobile()->inDarkMode();
+    $pages->assertScreenshotMatches();
+});
