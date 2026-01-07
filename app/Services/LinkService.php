@@ -36,7 +36,7 @@ class LinkService
         // Return LinkData from saved model
         return LinkData::fromModel($link);
     }
-    
+
 
 
 }
