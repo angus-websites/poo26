@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Contracts;
 
 use App\Data\LinkData;
