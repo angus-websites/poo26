@@ -45,6 +45,7 @@ new class extends Component {
         <div class="space-y-6">
             <flux:textarea
                 wire:model.defer="message"
+                required
                 label="Enter your message"
                 placeholder="Your message here..."
             />
