@@ -21,6 +21,8 @@ new class extends Component {
         ?string $backButtonText = null,
     ): void
     {
+
+        // Format the URL
         $this->shortUrl = url($shortUrl);
 
         // Allow overrides, fall back to defaults

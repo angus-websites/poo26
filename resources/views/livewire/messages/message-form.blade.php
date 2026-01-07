@@ -1,7 +1,5 @@
 <?php
 
-use App\Exceptions\SlugException;
-use App\Services\LinkService;
 use App\Services\MessageService;
 use Livewire\Volt\Component;
 
@@ -19,10 +17,7 @@ new class extends Component {
 
         try {
             $message = $messageService->create($this->message);
-
-            // TODO Create the shortened link for the message
-            $shortUrl = "helloWorld";
-
+            $shortUrl = $messageService->createSlugForMessage($message);
         } catch (Exception) {
             session()->flash('error', 'Failed to create message. Please try again.');
             return;
