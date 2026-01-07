@@ -8,6 +8,11 @@ new class extends Component {
      * The shortened URL to display
      */
     public string $shortUrl;
+
+    public function mount(string $shortUrl): void
+    {
+        $this->shortUrl = url($shortUrl);
+    }
 };
 ?>
 
