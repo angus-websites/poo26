@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LinkResolverController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -13,3 +14,8 @@ Route::get('/messages/create', function () {
 Route::get('/snippets/create', function () {
     return view('public.snippets.create');
 })->name('snippets.create');
+
+// Link Resolver
+Route::get('{link:slug}', [LinkResolverController::class, 'resolve'])
+    ->name('links.resolve');
+
