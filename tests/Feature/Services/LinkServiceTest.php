@@ -6,9 +6,13 @@ use App\Services\SlugService;
 use App\Contracts\LinkRepositoryInterface;
 use App\Exceptions\InvalidLinkException;
 use Illuminate\Support\Carbon;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
-uses(RefreshDatabase::class);
+/**
+ * LinkService Test Suite
+ *
+ * This test suite verifies the functionality of the LinkService,
+ * including link resolution, click tracking, and link creation.
+ */
 
 beforeEach(function () {
     // Create a real repository instance or mock if needed
