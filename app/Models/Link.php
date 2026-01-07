@@ -34,4 +34,10 @@ class Link extends Model
         'expires_at',
         'last_accessed',
     ];
+
+    protected $casts = [
+        'is_active' => 'boolean',
+        'expires_at' => 'datetime',
+        'last_accessed' => 'datetime',
+    ];
 }
