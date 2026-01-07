@@ -17,7 +17,7 @@
                     <flux:button variant="primary" class="w-full">Get Link</flux:button>
                 </div>
             </flux:card>
-            
+
         </div>
     </x-page-container>
 </x-layouts.public>
