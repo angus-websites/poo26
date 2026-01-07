@@ -1,7 +1,5 @@
-<x-layouts.public title="Create Message">
+<x-layouts.minimal title="Poo">
     <x-page-container>
-        <div class="max-w-xl mx-auto">
-            {{ $message->content }}
-        </div>
+        {{ $message->content }}
     </x-page-container>
-</x-layouts.public>
+</x-layouts.minimal>
