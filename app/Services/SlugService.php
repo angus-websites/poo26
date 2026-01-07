@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Contracts\LinkRepositoryInterface;
+use App\Exceptions\SlugException;
 use Illuminate\Support\Str;
 use RuntimeException;
 
@@ -22,7 +23,7 @@ class SlugService
      *
      * @return string The unique slug
      *
-     * @throws RuntimeException if unable to generate a unique slug
+     * @throws SlugException
      */
     public function generate(
         int $initialLength = 6,
@@ -44,7 +45,7 @@ class SlugService
             $length++;
         }
 
-        throw new RuntimeException('Unable to generate a unique short code');
+        throw new SlugException('Unable to generate a unique short code');
     }
 
 }

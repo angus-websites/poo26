@@ -1,5 +1,6 @@
 <?php
 
+use App\Exceptions\SlugException;
 use App\Models\Link;
 use App\Services\SlugService;
 use App\Contracts\LinkRepositoryInterface;
@@ -46,4 +47,4 @@ it('throws exception if unable to generate slug', function () {
     $this->slugService
         ->generate(2, 2, 2); // tiny max length + attempts
 
-})->throws(RuntimeException::class);
+})->throws(SlugException::class);
