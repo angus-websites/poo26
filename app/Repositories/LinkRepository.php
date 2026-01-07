@@ -3,15 +3,14 @@
 namespace App\Repositories;
 
 use App\Contracts\LinkRepositoryInterface;
-use App\Data\LinkData;
 use App\Models\Link;
 use Illuminate\Support\Collection;
 
 class LinkRepository implements LinkRepositoryInterface
 {
-    public function create(LinkData $data): Link
+    public function create(array $data): Link
     {
-        return Link::create($data->toArray());
+        return Link::create($data);
     }
 
     public function findById(int $id): ?Link

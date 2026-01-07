@@ -1,7 +1,6 @@
 <?php
 namespace App\Contracts;
 
-use App\Data\LinkData;
 use App\Models\Link;
 use Illuminate\Support\Collection;
 
@@ -10,7 +9,7 @@ interface LinkRepositoryInterface
     /**
      * Create a new short link.
      */
-    public function create(LinkData $data): Link;
+    public function create(array $data): Link;
 
     /**
      * Find a link by ID.

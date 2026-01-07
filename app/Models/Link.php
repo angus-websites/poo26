@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\SlugService;
 use Database\Factories\LinkFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -40,4 +41,16 @@ class Link extends Model
         'expires_at' => 'datetime',
         'last_accessed' => 'datetime',
     ];
+
+    /**
+     * Ensure a slug is generated when creating a new Link.
+     */
+    protected static function booted(): void
+    {
+        static::creating(function ($link) {
+            if (!$link->slug) {
+                $link->slug = app(SlugService::class)->generate();
+            }
+        });
+    }
 }

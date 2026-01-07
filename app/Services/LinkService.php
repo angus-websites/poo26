@@ -21,22 +21,19 @@ class LinkService
     /**
      * Create a new shortened link.
      * @param string $originalUrl The original URL to shorten.
-     * @return LinkData The created LinkData object.
+     * @return Link The created Link model.
      * @throws SlugException
      */
-    public function create(string $originalUrl): LinkData
+    public function create(string $originalUrl): Link
     {
-        // Create LinkData object
-        $data = new LinkData(
-            slug: $this->slugService->generate(),
-            originalUrl: $originalUrl,
+        // Save to repository
+        return $this->linkRepository->create(
+            [
+                'original_url' => $originalUrl,
+                'slug' => $this->slugService->generate(),
+            ]
         );
 
-        // Save to repository
-        $link = $this->linkRepository->create($data);
-
-        // Return LinkData from saved model
-        return LinkData::fromModel($link);
     }
 
     /**

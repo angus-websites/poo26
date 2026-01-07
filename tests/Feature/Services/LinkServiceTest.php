@@ -82,12 +82,12 @@ it('throws InvalidLinkException if link is inactive', function () {
 it ('creates a link successfully', function () {
     $originalUrl = 'https://example.com/some-page';
 
-    $linkData = $this->service->create($originalUrl);
+    $link = $this->service->create($originalUrl);
 
-    expect($linkData->originalUrl)->toBe($originalUrl)
-        ->and($linkData->slug)->not->toBeEmpty();
+    expect($link->original_url)->toBe($originalUrl)
+        ->and($link->slug)->not->toBeEmpty();
 
-    $linkInDb = Link::where('slug', $linkData->slug)->first();
+    $linkInDb = Link::where('slug', $link->slug)->first();
     expect($linkInDb)->not->toBeNull()
         ->and($linkInDb->original_url)->toBe($originalUrl);
 });
