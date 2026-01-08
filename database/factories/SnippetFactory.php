@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class SnippetFactory extends Factory
 {
+
+
     /**
      * Define the model's default state.
      *
@@ -17,9 +19,12 @@ class SnippetFactory extends Factory
      */
     public function definition(): array
     {
+        // Pull supported languages from config
+        $languages = array_keys(config('snippets.languages'));
+
         return [
-            'language' => $this->faker->randomElement(['PHP', 'JavaScript', 'Python', 'Ruby', 'Java', null]),
-            'content' => $this->faker->paragraphs(3, true),
+            'content' => $this->faker->paragraphs(2, true),
+            'language' => $this->faker->randomElement($languages),
         ];
     }
 }
