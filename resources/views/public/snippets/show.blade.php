@@ -1,15 +1,16 @@
 <x-layouts.minimal title="Poo">
     <x-page-container>
-        <div class="max-w-3xl mx-auto">
+        <div class="max-w-3xl mx-auto" x-data="{ content: @js($rawContent) }">
             <flux:card class="dark:bg-[#282A36]">
                 <flux:heading class="flex items-center gap-2">
                     Language: {{ $languageName }}
 
-                    <flux:tooltip class="ml-auto">
+                    <flux:tooltip class="ml-auto" content="Copy to clipboard">
                         <flux:button
                             square
+                            variant="primary"
                             x-data="{ copied: false }"
-                            x-on:click="copied = true; setTimeout(() => copied = false, 2000);"
+                            x-on:click="$clipboard(content);copied = true; setTimeout(() => copied = false, 2000);"
                         >
                             <flux:icon.clipboard
                                 variant="outline"

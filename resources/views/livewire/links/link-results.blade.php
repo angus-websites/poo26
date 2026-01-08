@@ -37,7 +37,7 @@ new class extends Component {
 };
 ?>
 
-<div class="space-y-6">
+<div class="space-y-6" x-data="{ url: $wire.entangle('$shortUrl') }" >
 
     <flux:heading size="lg">
         {{ $heading }}
@@ -62,9 +62,19 @@ new class extends Component {
         <flux:button
             variant="primary"
             class="w-full"
-            icon="clipboard"
+            x-data="{ copied: false }"
+            x-on:click="$clipboard(url);copied = true; setTimeout(() => copied = false, 2000);"
         >
-            Copy
+            <flux:icon.clipboard
+                variant="outline"
+                x-show="!copied"
+            />
+            <flux:icon.clipboard-document-check
+                variant="outline"
+                x-cloak
+                x-show="copied"
+            />
+            <span x-text="copied ? 'Copied' : 'Copy'"></span>
         </flux:button>
     </div>
 

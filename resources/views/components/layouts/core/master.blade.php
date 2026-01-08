@@ -7,5 +7,6 @@
     <body class="bg-green-50 dark:bg-zinc-800">
         {{ $slot }}
     </body>
+    <flux:toast/>
     @fluxScripts
 </html>
