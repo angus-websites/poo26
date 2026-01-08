@@ -9,9 +9,30 @@ new class extends Component {
      */
     public string $shortUrl;
 
-    public function mount(string $shortUrl): void
+    /**
+     * Configurable UI text
+     */
+    public string $heading = 'Your new link!';
+    public string $backButtonText = 'Shorten again';
+
+    public function mount(
+        string $shortUrl,
+        ?string $heading = null,
+        ?string $backButtonText = null,
+    ): void
     {
+
+        // Format the URL
         $this->shortUrl = url($shortUrl);
+
+        // Allow overrides, fall back to defaults
+        if ($heading !== null) {
+            $this->heading = $heading;
+        }
+
+        if ($backButtonText !== null) {
+            $this->backButtonText = $backButtonText;
+        }
     }
 };
 ?>
@@ -19,7 +40,7 @@ new class extends Component {
 <div class="space-y-6">
 
     <flux:heading size="lg">
-        Your new link!
+        {{ $heading }}
     </flux:heading>
 
     <div class="space-y-2">
@@ -35,7 +56,7 @@ new class extends Component {
             class="w-full"
             wire:click="$dispatch('link:reset')"
         >
-            Shorten again
+            {{ $backButtonText }}
         </flux:button>
 
         <flux:button

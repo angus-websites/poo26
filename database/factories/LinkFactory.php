@@ -30,7 +30,7 @@ class LinkFactory extends Factory
      */
     public function expired(): static
     {
-        return $this->state(fn() => [
+        return $this->state(fn () => [
             'expires_at' => Carbon::now()->subDay(),
         ]);
     }
@@ -40,7 +40,7 @@ class LinkFactory extends Factory
      */
     public function inactive(): static
     {
-        return $this->state(fn() => [
+        return $this->state(fn () => [
             'is_active' => false,
         ]);
     }
@@ -50,7 +50,7 @@ class LinkFactory extends Factory
      */
     public function accessed(): static
     {
-        return $this->state(fn() => [
+        return $this->state(fn () => [
             'clicks' => $this->faker->numberBetween(1, 100),
             'last_accessed' => Carbon::now()->subMinutes(
                 $this->faker->numberBetween(1, 1440)

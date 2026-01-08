@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\SlugService;
 use Database\Factories\LinkFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -19,7 +20,6 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $last_accessed
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  */
 class Link extends Model
 {
@@ -40,4 +40,16 @@ class Link extends Model
         'expires_at' => 'datetime',
         'last_accessed' => 'datetime',
     ];
+
+    /**
+     * Ensure a slug is generated when creating a new Link.
+     */
+    protected static function booted(): void
+    {
+        static::creating(function ($link) {
+            if (! $link->slug) {
+                $link->slug = app(SlugService::class)->generate();
+            }
+        });
+    }
 }

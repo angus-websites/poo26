@@ -5,8 +5,8 @@ it('can create new link', function () {
     $page = visit('/');
 
     $page->fill('url', 'https://example.com')
-         ->press('Shorten')
-         ->assertSee('Your new link!');
+        ->press('Shorten')
+        ->assertSee('Your new link!');
 });
 
 it('doesnt allow invalid urls', function () {

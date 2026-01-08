@@ -1,10 +1,8 @@
 <?php
 
+use App\Exceptions\InvalidLinkException;
 use App\Models\Link;
 use App\Services\LinkService;
-use App\Services\SlugService;
-use App\Contracts\LinkRepositoryInterface;
-use App\Exceptions\InvalidLinkException;
 use Illuminate\Support\Carbon;
 
 /**
@@ -13,16 +11,8 @@ use Illuminate\Support\Carbon;
  * This test suite verifies the functionality of the LinkService,
  * including link resolution, click tracking, and link creation.
  */
-
 beforeEach(function () {
-    // Create a real repository instance or mock if needed
-    $this->repo = app(LinkRepositoryInterface::class);
-    $this->slugService = app(SlugService::class);
-
-    $this->service = new LinkService(
-        $this->repo,
-        $this->slugService
-    );
+    $this->service = app(LinkService::class);
 });
 
 it('resolves an active link and increments clicks', function () {
@@ -79,15 +69,15 @@ it('throws InvalidLinkException if link is inactive', function () {
     $this->service->resolve($link);
 })->throws(InvalidLinkException::class);
 
-it ('creates a link successfully', function () {
+it('creates a link successfully', function () {
     $originalUrl = 'https://example.com/some-page';
 
-    $linkData = $this->service->create($originalUrl);
+    $link = $this->service->create($originalUrl);
 
-    expect($linkData->originalUrl)->toBe($originalUrl)
-        ->and($linkData->slug)->not->toBeEmpty();
+    expect($link->original_url)->toBe($originalUrl)
+        ->and($link->slug)->not->toBeEmpty();
 
-    $linkInDb = Link::where('slug', $linkData->slug)->first();
+    $linkInDb = Link::where('slug', $link->slug)->first();
     expect($linkInDb)->not->toBeNull()
         ->and($linkInDb->original_url)->toBe($originalUrl);
 });

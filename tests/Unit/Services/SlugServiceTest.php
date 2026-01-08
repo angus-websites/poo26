@@ -1,9 +1,9 @@
 <?php
 
+use App\Contracts\LinkRepositoryInterface;
 use App\Exceptions\SlugException;
 use App\Models\Link;
 use App\Services\SlugService;
-use App\Contracts\LinkRepositoryInterface;
 use Illuminate\Support\Str;
 
 beforeEach(function () {
@@ -29,7 +29,7 @@ it('generates a unique slug after collisions', function () {
         ->shouldReceive('findBySlug')
         ->andReturnUsing(function ($slug) use ($existingSlugs) {
             return in_array($slug, $existingSlugs)
-                ? new Link()
+                ? new Link
                 : null;
         });
 
@@ -38,11 +38,10 @@ it('generates a unique slug after collisions', function () {
     expect($slug)->not()->toBeIn($existingSlugs);
 });
 
-
 it('throws exception if unable to generate slug', function () {
     $this->repo
         ->shouldReceive('findBySlug')
-        ->andReturn(new Link()); // always collides
+        ->andReturn(new Link); // always collides
 
     $this->slugService
         ->generate(2, 2, 2); // tiny max length + attempts
