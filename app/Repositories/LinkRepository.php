@@ -18,16 +18,9 @@ class LinkRepository implements LinkRepositoryInterface
         return Link::find($id);
     }
 
-    public function findBySlug(string $slug): ?Link
+    public function findByHash(string $hash): ?Link
     {
-        return Link::where('slug', $slug)
-            ->first();
-    }
-
-    public function findPermanentByHash(string $hash): ?Link
-    {
-        return Link::permanent()
-            ->where('url_hash', $hash)
+        return Link::where('url_hash', $hash)
             ->first();
     }
 
