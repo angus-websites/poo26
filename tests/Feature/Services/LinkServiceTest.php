@@ -81,3 +81,71 @@ it('creates a link successfully', function () {
     expect($linkInDb)->not->toBeNull()
         ->and($linkInDb->original_url)->toBe($originalUrl);
 });
+
+it('returns existing link if the same URL is already active', function () {
+    $originalUrl = 'https://example.com';
+
+    // Create existing active link
+    $existing = Link::create([
+        'original_url' => $originalUrl,
+        'slug' => 'activeslug',
+        'clicks' => 0,
+        'is_active' => true,
+        'expires_at' => null,
+    ]);
+
+    // Attempt to create same URL
+    $link = $this->service->create($originalUrl);
+
+    // Assert the same link is returned and 1 link exists in DB
+    expect($link->id)->toBe($existing->id)
+        ->and(Link::count())->toBe(1);
+
+});
+
+it('creates a new link if the existing link is inactive', function () {
+    $originalUrl = 'https://example.com';
+
+    // Create inactive link
+    Link::create([
+        'original_url' => $originalUrl,
+        'slug' => 'inactive-slug',
+        'clicks' => 0,
+        'is_active' => false,
+        'expires_at' => null,
+    ]);
+
+    // Attempt to create same URL
+    $link = $this->service->create($originalUrl);
+
+    // Assert a new link is created
+    expect($link->slug)->not->toBe('inactive-slug')
+        ->and($link->original_url)->toBe($originalUrl)
+        ->and(Link::count())->toBe(2);
+
+});
+
+it('creates a new link if the existing link is expired', function () {
+    Carbon::setTestNow('2026-01-02 12:00:00');
+    $originalUrl = 'https://example.com';
+
+    // Create expired link
+    Link::create([
+        'original_url' => $originalUrl,
+        'slug' => 'expired-slug',
+        'clicks' => 0,
+        'is_active' => true,
+        'expires_at' => Carbon::now()->subDay(),
+        'url_hash' => hash('sha256', $originalUrl),
+    ]);
+
+    // Attempt to create same URL
+    $link = $this->service->create($originalUrl);
+
+    // Assert new link created
+    expect($link->slug)->not->toBe('expired-slug')
+        ->and($link->original_url)->toBe($originalUrl)
+        ->and(Link::count())->toBe(2);
+
+    // DB should have 2 links
+});

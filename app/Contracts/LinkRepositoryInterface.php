@@ -23,6 +23,11 @@ interface LinkRepositoryInterface
     public function findBySlug(string $slug): ?Link;
 
     /**
+     * Find a link by URL hash.
+     */
+    public function findPermanentByHash(string $hash): ?Link;
+
+    /**
      * Get all links (optionally paginated later).
      */
     public function all(): Collection;

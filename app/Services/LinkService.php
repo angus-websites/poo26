@@ -25,11 +25,24 @@ class LinkService
      */
     public function create(string $originalUrl): Link
     {
+
+        // Compute URL hash
+        $hash = hash('sha256', $originalUrl);
+
+        // See if this URL has already been shortened
+        $existing = $this->linkRepository->findPermanentByHash($hash);
+
+        // Return existing link if found
+        if ($existing) {
+            return $existing;
+        }
+
         // Save to repository
         return $this->linkRepository->create(
             [
                 'original_url' => $originalUrl,
                 'slug' => $this->slugService->generate(),
+                'url_hash' => $hash,
             ]
         );
 
@@ -44,7 +57,7 @@ class LinkService
     {
 
         // Check if link is not active or expired
-        if (! $link->is_active || ($link->expires_at && $link->expires_at->isPast())) {
+        if (! $link->is_active || ($link->expires_at && $link->is_expired)) {
             throw new InvalidLinkException(
                 'The link is either inactive or has expired.'
             );
