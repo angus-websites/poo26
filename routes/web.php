@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LinkResolverController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\SnippetController;
 use App\Http\Controllers\SystemController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,11 @@ Route::get('/messages/{message}', [MessageController::class, 'show'])
 Route::get('/snippets/create', function () {
     return view('public.snippets.create');
 })->name('snippets.create');
+
+// Show Snippets
+Route::get('/snippets/{snippet}', [SnippetController::class, 'show'])
+    ->name('messages.show');
+
 
 // System information
 Route::get('/version', [SystemController::class, 'version']);
