@@ -2,7 +2,4 @@
 
 namespace App\Exceptions;
 
-class InvalidLinkException extends \Exception
-{
-
-}
+class InvalidLinkException extends \Exception {}

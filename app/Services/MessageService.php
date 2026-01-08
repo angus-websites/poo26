@@ -11,13 +11,12 @@ class MessageService
     public function __construct(
         protected MessageRepositoryInterface $messageRepository,
         protected LinkService $linkService
-    )
-    {}
+    ) {}
 
     /**
      * Create a new message
      *
-     * @param string $content The content of the message
+     * @param  string  $content  The content of the message
      */
     public function create(string $content): Message
     {
@@ -31,8 +30,9 @@ class MessageService
     /**
      * Create a URL for accessing the message
      *
-     * @param Message $message The message to create a URL for
+     * @param  Message  $message  The message to create a URL for
      * @return string The slug of the created link
+     *
      * @throws SlugException
      */
     public function createSlugForMessage(Message $message): string
@@ -43,7 +43,4 @@ class MessageService
 
         return $link->slug;
     }
-
-
-
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Contracts;
 
 use App\Models\Link;
@@ -35,5 +36,4 @@ interface LinkRepositoryInterface
      * Delete a link.
      */
     public function delete(Link $link): bool;
-
 }

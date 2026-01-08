@@ -1,6 +1,6 @@
 <?php
 
-//arch()
+// arch()
 //    ->expect('App\Models')
 //    ->toBeClasses()
 //    ->toExtend('Illuminate\Database\Eloquent\Model')

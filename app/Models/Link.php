@@ -20,7 +20,6 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $last_accessed
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  */
 class Link extends Model
 {
@@ -48,7 +47,7 @@ class Link extends Model
     protected static function booted(): void
     {
         static::creating(function ($link) {
-            if (!$link->slug) {
+            if (! $link->slug) {
                 $link->slug = app(SlugService::class)->generate();
             }
         });

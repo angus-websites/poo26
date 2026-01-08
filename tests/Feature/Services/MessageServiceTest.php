@@ -6,17 +6,14 @@ use App\Models\Message;
 use App\Services\LinkService;
 use App\Services\MessageService;
 
-
 /**
  * MessageService Test Suite
  *
  * This test suite verifies the functionality of the MessageService
  */
-
 beforeEach(function () {
     $this->service = app(MessageService::class);
 });
-
 
 it('creates a message and persists it to the database', function () {
 
@@ -36,7 +33,6 @@ it('creates a message and persists it to the database', function () {
         'content' => $content,
     ]);
 });
-
 
 it('creates a link for a message and persists it to the links table', function () {
 

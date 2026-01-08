@@ -1,10 +1,9 @@
 <?php
 
-
 $publicRoutes = [
-    "/" => "Home Page",
-    "/messages/create" => "New Message Page",
-    "/snippets/create" => "New Snippet Page",
+    '/' => 'Home Page',
+    '/messages/create' => 'New Message Page',
+    '/snippets/create' => 'New Snippet Page',
 ];
 
 it('no smoke for public pages', function () use ($publicRoutes) {

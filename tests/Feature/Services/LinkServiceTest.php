@@ -1,8 +1,8 @@
 <?php
 
+use App\Exceptions\InvalidLinkException;
 use App\Models\Link;
 use App\Services\LinkService;
-use App\Exceptions\InvalidLinkException;
 use Illuminate\Support\Carbon;
 
 /**
@@ -11,7 +11,6 @@ use Illuminate\Support\Carbon;
  * This test suite verifies the functionality of the LinkService,
  * including link resolution, click tracking, and link creation.
  */
-
 beforeEach(function () {
     $this->service = app(LinkService::class);
 });
@@ -70,7 +69,7 @@ it('throws InvalidLinkException if link is inactive', function () {
     $this->service->resolve($link);
 })->throws(InvalidLinkException::class);
 
-it ('creates a link successfully', function () {
+it('creates a link successfully', function () {
     $originalUrl = 'https://example.com/some-page';
 
     $link = $this->service->create($originalUrl);

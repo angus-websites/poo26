@@ -38,6 +38,6 @@ class LinkRepository implements LinkRepositoryInterface
 
     public function delete(Link $link): bool
     {
-        return (bool)$link->delete();
+        return (bool) $link->delete();
     }
 }

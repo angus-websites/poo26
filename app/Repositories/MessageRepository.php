@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Contracts\MessageRepositoryInterface;
@@ -7,7 +8,6 @@ use Illuminate\Support\Collection;
 
 class MessageRepository implements MessageRepositoryInterface
 {
-
     public function create(array $data): Message
     {
         return Message::create($data);
@@ -30,6 +30,6 @@ class MessageRepository implements MessageRepositoryInterface
 
     public function delete(Message $message): bool
     {
-        return (bool)$message->delete();
+        return (bool) $message->delete();
     }
 }

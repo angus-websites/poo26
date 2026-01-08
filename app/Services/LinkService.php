@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Contracts\LinkRepositoryInterface;
-use App\Data\LinkData;
 use App\Exceptions\InvalidLinkException;
 use App\Exceptions\SlugException;
 use App\Models\Link;
@@ -14,14 +13,14 @@ class LinkService
     public function __construct(
         protected LinkRepositoryInterface $linkRepository,
         protected SlugService $slugService
-    )
-    {
-    }
+    ) {}
 
     /**
      * Create a new shortened link.
-     * @param string $originalUrl The original URL to shorten.
+     *
+     * @param  string  $originalUrl  The original URL to shorten.
      * @return Link The created Link model.
+     *
      * @throws SlugException
      */
     public function create(string $originalUrl): Link
@@ -45,7 +44,7 @@ class LinkService
     {
 
         // Check if link is not active or expired
-        if (!$link->is_active || ($link->expires_at && $link->expires_at->isPast())) {
+        if (! $link->is_active || ($link->expires_at && $link->expires_at->isPast())) {
             throw new InvalidLinkException(
                 'The link is either inactive or has expired.'
             );
@@ -60,8 +59,8 @@ class LinkService
 
     /**
      * Track access analytics for a link.
-     * @param Link $link The link to track.
-     * @return void
+     *
+     * @param  Link  $link  The link to track.
      */
     protected function trackAccess(Link $link): void
     {
@@ -74,7 +73,4 @@ class LinkService
             'last_accessed' => Carbon::now(),
         ]);
     }
-
-
-
 }

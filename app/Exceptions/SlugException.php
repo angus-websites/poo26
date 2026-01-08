@@ -2,7 +2,4 @@
 
 namespace App\Exceptions;
 
-class SlugException extends \Exception
-{
-
-}
+class SlugException extends \Exception {}
