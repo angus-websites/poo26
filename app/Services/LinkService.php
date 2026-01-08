@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Contracts\LinkRepositoryInterface;
 use App\Exceptions\InvalidLinkException;
 use App\Exceptions\SlugException;
-use App\Models\Link;
+use App\Models\Destination;
 use Illuminate\Support\Carbon;
 
 class LinkService
@@ -19,11 +19,11 @@ class LinkService
      * Create a new shortened link.
      *
      * @param  string  $originalUrl  The original URL to shorten.
-     * @return Link The created Link model.
+     * @return Destination The created Link model.
      *
      * @throws SlugException
      */
-    public function create(string $originalUrl): Link
+    public function create(string $originalUrl): Destination
     {
 
         // Compute URL hash
@@ -53,7 +53,7 @@ class LinkService
      *
      * @throws InvalidLinkException
      */
-    public function resolve(Link $link): string
+    public function resolve(Destination $link): string
     {
 
         // Check if link is not active or expired
@@ -73,9 +73,9 @@ class LinkService
     /**
      * Track access analytics for a link.
      *
-     * @param  Link  $link  The link to track.
+     * @param  Destination  $link  The link to track.
      */
-    protected function trackAccess(Link $link): void
+    protected function trackAccess(Destination $link): void
     {
         // Increment clicks
         $clicks = $link->clicks + 1;

@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('slugs', function (Blueprint $table) {
+        Schema::create('links', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique();
-            $table->foreignId('link_id')->constrained('links')->cascadeOnDelete();
+            $table->foreignId('destination_id')->constrained('destinations')->cascadeOnDelete();
             $table->boolean('is_active')->default(true);
             $table->timestamp('expires_at')->nullable();
             $table->unsignedBigInteger('clicks')->default(0);
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('slugs');
+        Schema::dropIfExists('links');
     }
 };

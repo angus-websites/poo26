@@ -4,23 +4,21 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
-use App\Models\Link;
+use App\Models\Destination;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Str;
 
 class LinkFactory extends Factory
 {
-    protected $model = Link::class;
+    protected $model = Destination::class;
 
     public function definition(): array
     {
         return [
-            'slug' => Str::random(8),
-            'original_url' => $this->faker->url(),
-            'clicks' => 0,
+            'destination' => Destination::factory(),
             'is_active' => true,
             'expires_at' => null,
+            'clicks' => 0,
             'last_accessed' => null,
         ];
     }

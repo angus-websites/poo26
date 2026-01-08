@@ -3,40 +3,40 @@
 namespace App\Repositories;
 
 use App\Contracts\LinkRepositoryInterface;
-use App\Models\Link;
+use App\Models\Destination;
 use Illuminate\Support\Collection;
 
 class LinkRepository implements LinkRepositoryInterface
 {
-    public function create(array $data): Link
+    public function create(array $data): Destination
     {
-        return Link::create($data);
+        return Destination::create($data);
     }
 
-    public function findById(int $id): ?Link
+    public function findById(int $id): ?Destination
     {
-        return Link::find($id);
+        return Destination::find($id);
     }
 
-    public function findByHash(string $hash): ?Link
+    public function findByHash(string $hash): ?Destination
     {
-        return Link::where('url_hash', $hash)
+        return Destination::where('url_hash', $hash)
             ->first();
     }
 
     public function all(): Collection
     {
-        return Link::all();
+        return Destination::all();
     }
 
-    public function update(Link $link, array $data): Link
+    public function update(Destination $link, array $data): Destination
     {
         $link->update($data);
 
         return $link;
     }
 
-    public function delete(Link $link): bool
+    public function delete(Destination $link): bool
     {
         return (bool) $link->delete();
     }

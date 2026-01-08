@@ -1,7 +1,7 @@
 <?php
 
 use App\Exceptions\InvalidLinkException;
-use App\Models\Link;
+use App\Models\Destination;
 use App\Services\LinkService;
 use Illuminate\Support\Carbon;
 
@@ -21,7 +21,7 @@ it('resolves an active link and increments clicks', function () {
     Carbon::setTestNow($now);
 
     // Create a link in the database
-    $link = Link::create([
+    $link = Destination::create([
         'original_url' => 'https://example.com',
         'slug' => 'testslug',
         'is_active' => true,
@@ -44,7 +44,7 @@ it('resolves an active link and increments clicks', function () {
 it('throws InvalidLinkException if link is expired', function () {
     Carbon::setTestNow(Carbon::parse('2026-01-02 12:00:00'));
 
-    $link = Link::create([
+    $link = Destination::create([
         'original_url' => 'https://example.com',
         'slug' => 'expiredslug',
         'is_active' => true,
@@ -58,7 +58,7 @@ it('throws InvalidLinkException if link is expired', function () {
 it('throws InvalidLinkException if link is inactive', function () {
     Carbon::setTestNow(Carbon::parse('2026-01-07 12:00:00'));
 
-    $link = Link::create([
+    $link = Destination::create([
         'original_url' => 'https://example.com',
         'slug' => 'inactiveslug',
         'is_active' => false,
@@ -77,7 +77,7 @@ it('creates a link successfully', function () {
     expect($link->original_url)->toBe($originalUrl)
         ->and($link->slug)->not->toBeEmpty();
 
-    $linkInDb = Link::where('slug', $link->slug)->first();
+    $linkInDb = Destination::where('slug', $link->slug)->first();
     expect($linkInDb)->not->toBeNull()
         ->and($linkInDb->original_url)->toBe($originalUrl);
 });
@@ -86,7 +86,7 @@ it('returns existing link if the same URL is already active', function () {
     $originalUrl = 'https://example.com';
 
     // Create existing active link
-    $existing = Link::create([
+    $existing = Destination::create([
         'original_url' => $originalUrl,
         'slug' => 'activeslug',
         'clicks' => 0,
@@ -99,7 +99,7 @@ it('returns existing link if the same URL is already active', function () {
 
     // Assert the same link is returned and 1 link exists in DB
     expect($link->id)->toBe($existing->id)
-        ->and(Link::count())->toBe(1);
+        ->and(Destination::count())->toBe(1);
 
 });
 
@@ -107,7 +107,7 @@ it('creates a new link if the existing link is inactive', function () {
     $originalUrl = 'https://example.com';
 
     // Create inactive link
-    Link::create([
+    Destination::create([
         'original_url' => $originalUrl,
         'slug' => 'inactive-slug',
         'clicks' => 0,
@@ -121,7 +121,7 @@ it('creates a new link if the existing link is inactive', function () {
     // Assert a new link is created
     expect($link->slug)->not->toBe('inactive-slug')
         ->and($link->original_url)->toBe($originalUrl)
-        ->and(Link::count())->toBe(2);
+        ->and(Destination::count())->toBe(2);
 
 });
 
@@ -130,7 +130,7 @@ it('creates a new link if the existing link is expired', function () {
     $originalUrl = 'https://example.com';
 
     // Create expired link
-    Link::create([
+    Destination::create([
         'original_url' => $originalUrl,
         'slug' => 'expired-slug',
         'clicks' => 0,
@@ -145,7 +145,7 @@ it('creates a new link if the existing link is expired', function () {
     // Assert new link created
     expect($link->slug)->not->toBe('expired-slug')
         ->and($link->original_url)->toBe($originalUrl)
-        ->and(Link::count())->toBe(2);
+        ->and(Destination::count())->toBe(2);
 
     // DB should have 2 links
 });

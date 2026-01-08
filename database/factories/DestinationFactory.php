@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\Destination;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Slug>
+ * @extends Factory<Destination>
  */
-class SlugFactory extends Factory
+class DestinationFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +18,8 @@ class SlugFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'url' => $this->faker->url(),
+            'url_hash' => hash('sha256', $this->faker->url()),
         ];
     }
 }
