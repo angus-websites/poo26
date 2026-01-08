@@ -42,15 +42,16 @@ new class extends Component {
             <flux:heading size="lg">Create a message</flux:heading>
         </div>
 
-        <div class="space-y-6">
+        <flux:field>
+            <flux:label  badge="Markdown supported">Enter your message</flux:label>
             <flux:textarea
                 wire:model.defer="message"
                 required
-                label="Enter your message"
-                badge="Markdown supported"
                 placeholder="Your message here..."
             />
-        </div>
+            <flux:error name="message"/>
+            <flux:description>Content is limited to 3000 characters</flux:description>
+        </flux:field>
 
         <div class="space-y-2">
             <flux:button type="submit" variant="primary" class="w-full">Get Link</flux:button>
