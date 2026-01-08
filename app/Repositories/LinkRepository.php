@@ -24,6 +24,13 @@ class LinkRepository implements LinkRepositoryInterface
             ->first();
     }
 
+    public function findPermanentByHash(string $hash): ?Link
+    {
+        return Link::permanent()
+            ->where('url_hash', $hash)
+            ->first();
+    }
+
     public function all(): Collection
     {
         return Link::all();

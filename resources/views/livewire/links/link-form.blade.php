@@ -45,10 +45,12 @@ new class extends Component {
             <flux:heading size="lg">Shorten a URL</flux:heading>
         </div>
 
-        <div class="space-y-6">
-            <flux:input wire:model.defer="url" required icon="link" label="Enter URL to shorten" type="url"
+        <flux:field>
+            <flux:label >Enter URL to shorten</flux:label>
+            <flux:input wire:model.defer="url" required icon="link" type="url"
                         placeholder="https://example.com"/>
-        </div>
+            <flux:error name="url"/>
+        </flux:field>
 
         <div class="space-y-2">
             <flux:button type="submit" variant="primary" class="w-full">Shorten</flux:button>
