@@ -1,12 +1,10 @@
 <?php
 
-use App\Contracts\MessageRepositoryInterface;
 use App\Contracts\SnippetRepositoryInterface;
 use App\Exceptions\SlugException;
 use App\Models\Message;
 use App\Models\Snippet;
 use App\Services\LinkService;
-use App\Services\MessageService;
 use App\Services\SnippetService;
 
 /**

@@ -26,7 +26,6 @@ Route::get('/snippets/create', function () {
 Route::get('/snippets/{snippet}', [SnippetController::class, 'show'])
     ->name('snippets.show');
 
-
 // System information
 Route::get('/version', [SystemController::class, 'version']);
 Route::get('/info', [SystemController::class, 'info']);

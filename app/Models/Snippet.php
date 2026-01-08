@@ -21,6 +21,7 @@ class Snippet extends Model
 {
     /** @use HasFactory<SnippetFactory> */
     use HasFactory;
+
     use HasUuids;
 
     protected $fillable = [

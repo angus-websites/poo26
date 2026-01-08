@@ -10,8 +10,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class SnippetFactory extends Factory
 {
-
-
     /**
      * Define the model's default state.
      *

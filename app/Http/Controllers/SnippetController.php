@@ -16,7 +16,7 @@ class SnippetController extends Controller
         // Convert Markdown content to HTML
         $code = $snippet->content;
         $language = $snippet->language ?? 'plaintext';
-        $htmlContent = '<pre><code class="language-' . e($language) . '">' . e($code) . '</code></pre>';
+        $htmlContent = '<pre><code class="language-'.e($language).'">'.e($code).'</code></pre>';
 
         return view('public.snippets.show', compact('snippet', 'htmlContent'));
     }

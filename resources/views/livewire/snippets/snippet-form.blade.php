@@ -1,6 +1,6 @@
 <?php
 
-use App\Services\MessageService;
+use App\Services\SnippetService;
 use Illuminate\Validation\Rule;
 use Livewire\Volt\Component;
 
@@ -19,14 +19,22 @@ new class extends Component {
     }
 
 
-    public function submit(MessageService $messageService): void
+    public function submit(SnippetService $snippetService): void
     {
         $this->validate();
 
-//        // Emit the shortened Message event
-//        $this->dispatch('snippet:shortened', [
-//            'short_url' => $shortUrl,
-//        ]);
+        try {
+            $message = $snippetService->create($this->snippet, $this->language);
+            $shortUrl = $snippetService->createSlugForSnippet($message);
+        } catch (Exception) {
+            session()->flash('error', 'Failed to create snippet. Please try again.');
+            return;
+        }
+
+        // Emit the shortened Message event
+        $this->dispatch('snippet:shortened', [
+            'short_url' => $shortUrl,
+        ]);
 
         // Reset the form
         $this->reset([
