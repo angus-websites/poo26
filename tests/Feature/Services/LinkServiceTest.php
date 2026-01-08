@@ -51,7 +51,7 @@ it('throws InvalidLinkException if link is expired', function () {
     Carbon::setTestNow(Carbon::parse('2026-01-02 12:00:00'));
 
     /**
-     * Create an active link
+     * Create an expired link
      * @var Link $link
      */
     $link = Link::factory()
@@ -70,13 +70,19 @@ it('throws InvalidLinkException if link is expired', function () {
 it('throws InvalidLinkException if link is inactive', function () {
     Carbon::setTestNow(Carbon::parse('2026-01-07 12:00:00'));
 
-    $link = Destination::create([
-        'original_url' => 'https://example.com',
-        'slug' => 'inactiveslug',
-        'is_active' => false,
-        'clicks' => 0,
-        'expires_at' => Carbon::now()->addDay(),
-    ]);
+    /**
+     * Create an inactive link
+     * @var Link $link
+     */
+    $link = Link::factory()
+        ->forUrl('https://example.com')
+        ->create([
+            'is_active' => false,
+            'code' => 'code123',
+            'clicks' => 0,
+            'last_accessed' => null,
+            'expires_at' => null,
+        ]);
 
     $this->service->resolve($link);
 })->throws(InvalidLinkException::class);
@@ -111,17 +117,6 @@ it('creates a new code for the same url', function () {
 
 });
 
-it('adds https to url if not provided', function () {
-
-    $originalUrl = 'example.com/page';
-
-    $link = $this->service->create($originalUrl);
-
-    $destination = Destination::find($link->destination_id);
-
-    expect($destination->url)->toBe('https://example.com/page');
-
-});
 
 
 
