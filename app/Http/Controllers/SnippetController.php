@@ -9,11 +9,9 @@ use Illuminate\Contracts\View\View;
 
 class SnippetController extends Controller
 {
-
     public function __construct(
         protected SnippetService $snippetService
-    )
-    {}
+    ) {}
 
     /**
      * Resolve a link and redirect to its target URL

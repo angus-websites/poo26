@@ -30,7 +30,8 @@ class SnippetService
 
     /**
      * Generate HTML content for a snippet with syntax highlighting
-     * @param Snippet $snippet The snippet model
+     *
+     * @param  Snippet  $snippet  The snippet model
      * @return string The HTML content with syntax highlighting
      */
     public function generateHtmlContent(Snippet $snippet): string
@@ -45,13 +46,13 @@ class SnippetService
     /**
      * Get the human-readable name of a programming language
      * If not found, return the original language code
-     * @param string $languageCode
+     *
      * @return string The human-readable name of the programming language
      */
     public function getLanguageName(string $languageCode): string
     {
         return collect(config('snippets.languages'))
-            ->flatMap(fn($group) => $group)
+            ->flatMap(fn ($group) => $group)
             ->get($languageCode)['label']
             ?? $languageCode;
 

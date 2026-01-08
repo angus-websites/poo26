@@ -22,11 +22,10 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $last_accessed
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property-read bool $is_expired
+ *
  * @method static Builder|Link active()
  * @method static Builder|Link permanent()
- *
  */
 class Link extends Model
 {
@@ -92,11 +91,9 @@ class Link extends Model
      * Determine if the link is expired.
      *
      * use $link->is_expired
-     * @return bool
      */
     public function getIsExpiredAttribute(): bool
     {
         return $this->expires_at?->isPast() ?? false;
     }
-
 }

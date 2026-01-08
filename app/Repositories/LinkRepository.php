@@ -47,6 +47,4 @@ class LinkRepository implements LinkRepositoryInterface
     {
         return (bool) $link->delete();
     }
-
-
 }

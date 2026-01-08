@@ -2,7 +2,6 @@
 
 use App\Contracts\SnippetRepositoryInterface;
 use App\Exceptions\SlugException;
-use App\Models\Message;
 use App\Models\Snippet;
 use App\Services\LinkService;
 use App\Services\SnippetService;
@@ -38,13 +37,13 @@ it('creates a snippet and persists it to the database', function () {
     ]);
 });
 
-it('creates a link for a message and persists it to the links table', function () {
+it('creates a link for a snippet and persists it to the links table', function () {
 
-    // Create message
-    $message = $this->service->create('Test message for slug');
+    // Create snippet
+    $snippet = $this->service->create('hello world');
 
     // Generate slug
-    $slug = $this->service->createSlugForMessage($message);
+    $slug = $this->service->createSlugForSnippet($snippet);
 
     // Assert slug is non-empty
     expect($slug)->toBeString()->not()->toBeEmpty();
@@ -52,7 +51,7 @@ it('creates a link for a message and persists it to the links table', function (
     // Assert Link exists in database
     $this->assertDatabaseHas('links', [
         'slug' => $slug,
-        'original_url' => route('messages.show', ['message' => $message->id], false),
+        'original_url' => route('snippets.show', ['snippet' => $snippet->id], false),
     ]);
 });
 
