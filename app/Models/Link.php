@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Services\SlugService;
+use App\Services\Util\SlugService;
 use Database\Factories\LinkFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

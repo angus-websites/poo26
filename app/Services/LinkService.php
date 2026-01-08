@@ -4,8 +4,9 @@ namespace App\Services;
 
 use App\Contracts\LinkRepositoryInterface;
 use App\Exceptions\InvalidLinkException;
-use App\Exceptions\SlugException;
+use App\Exceptions\CodeGeneratorException;
 use App\Models\Destination;
+use App\Services\Util\SlugService;
 use Illuminate\Support\Carbon;
 
 class LinkService
@@ -21,7 +22,7 @@ class LinkService
      * @param  string  $originalUrl  The original URL to shorten.
      * @return Destination The created Link model.
      *
-     * @throws SlugException
+     * @throws CodeGeneratorException
      */
     public function create(string $originalUrl): Destination
     {

@@ -1,9 +1,9 @@
 <?php
 
 use App\Contracts\LinkRepositoryInterface;
-use App\Exceptions\SlugException;
+use App\Exceptions\CodeGeneratorException;
 use App\Models\Destination;
-use App\Services\SlugService;
+use App\Services\Util\SlugService;
 use Illuminate\Support\Str;
 
 beforeEach(function () {
@@ -46,4 +46,4 @@ it('throws exception if unable to generate slug', function () {
     $this->slugService
         ->generate(2, 2, 2); // tiny max length + attempts
 
-})->throws(SlugException::class);
+})->throws(CodeGeneratorException::class);

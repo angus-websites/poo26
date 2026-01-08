@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Contracts\SnippetRepositoryInterface;
-use App\Exceptions\SlugException;
+use App\Exceptions\CodeGeneratorException;
 use App\Models\Snippet;
 use Spatie\ShikiPhp\Shiki;
 
@@ -64,7 +64,7 @@ class SnippetService
      * @param  Snippet  $snippet  The snippet model to create the link for
      * @return string The slug of the created link
      *
-     * @throws SlugException
+     * @throws CodeGeneratorException
      */
     public function createSlugForSnippet(Snippet $snippet): string
     {

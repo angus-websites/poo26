@@ -1,7 +1,7 @@
 <?php
 
 use App\Contracts\SnippetRepositoryInterface;
-use App\Exceptions\SlugException;
+use App\Exceptions\CodeGeneratorException;
 use App\Models\Snippet;
 use App\Services\LinkService;
 use App\Services\SnippetService;
@@ -62,10 +62,10 @@ it('propagates SlugException when link creation fails', function () {
     $mockLinkService = Mockery::mock(LinkService::class);
     $mockLinkService->shouldReceive('create')
         ->once()
-        ->andThrow(SlugException::class);
+        ->andThrow(CodeGeneratorException::class);
 
     // Create SnippetService with mocked LinkService
     $service = new SnippetService(app(SnippetRepositoryInterface::class), $mockLinkService);
 
     $service->createSlugForSnippet($snippet);
-})->throws(SlugException::class);
+})->throws(CodeGeneratorException::class);

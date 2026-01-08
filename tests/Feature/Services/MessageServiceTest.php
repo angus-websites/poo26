@@ -1,7 +1,7 @@
 <?php
 
 use App\Contracts\MessageRepositoryInterface;
-use App\Exceptions\SlugException;
+use App\Exceptions\CodeGeneratorException;
 use App\Models\Message;
 use App\Services\LinkService;
 use App\Services\MessageService;
@@ -59,10 +59,10 @@ it('propagates SlugException when link creation fails', function () {
     $mockLinkService = Mockery::mock(LinkService::class);
     $mockLinkService->shouldReceive('create')
         ->once()
-        ->andThrow(SlugException::class);
+        ->andThrow(CodeGeneratorException::class);
 
     // Create MessageService with mocked LinkService
     $service = new MessageService(app(MessageRepositoryInterface::class), $mockLinkService);
 
     $service->createSlugForMessage($message);
-})->throws(SlugException::class);
+})->throws(CodeGeneratorException::class);

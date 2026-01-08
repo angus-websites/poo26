@@ -6,7 +6,7 @@ use App\Models\Destination;
 use App\Models\Link;
 use Illuminate\Support\Collection;
 
-interface LinkRepositoryInterface
+interface LinkRepositoryInterface extends CodeRepositoryInterface
 {
     /**
      * Create a new short link.

@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Contracts\MessageRepositoryInterface;
-use App\Exceptions\SlugException;
+use App\Exceptions\CodeGeneratorException;
 use App\Models\Message;
 
 class MessageService
@@ -33,7 +33,7 @@ class MessageService
      * @param  Message  $message  The message to create a URL for
      * @return string The slug of the created link
      *
-     * @throws SlugException
+     * @throws CodeGeneratorException
      */
     public function createSlugForMessage(Message $message): string
     {
