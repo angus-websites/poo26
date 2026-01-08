@@ -6,14 +6,14 @@ use App\Contracts\LinkRepositoryInterface;
 use App\Exceptions\InvalidLinkException;
 use App\Exceptions\CodeGeneratorException;
 use App\Models\Destination;
-use App\Services\Util\SlugService;
+use App\Services\Util\CodeGeneratorService;
 use Illuminate\Support\Carbon;
 
 class LinkService
 {
     public function __construct(
         protected LinkRepositoryInterface $linkRepository,
-        protected SlugService $slugService
+        protected CodeGeneratorService $codeGeneratorService
     ) {}
 
     /**
