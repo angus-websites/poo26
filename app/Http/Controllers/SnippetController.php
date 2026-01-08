@@ -13,11 +13,6 @@ class SnippetController extends Controller
      */
     public function show(Snippet $snippet): Factory|View
     {
-        // Convert Markdown content to HTML
-        $code = $snippet->content;
-        $language = $snippet->language ?? 'plaintext';
-        $htmlContent = '<pre><code class="language-'.e($language).'">'.e($code).'</code></pre>';
-
-        return view('public.snippets.show', compact('snippet', 'htmlContent'));
+        return view('public.snippets.show', compact('snippet'));
     }
 }

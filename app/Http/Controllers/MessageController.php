@@ -14,9 +14,6 @@ class MessageController extends Controller
      */
     public function show(Message $message): Factory|View
     {
-        // Convert Markdown content to HTML
-        $htmlContent = Str::markdown($message->content);
-
-        return view('public.messages.show', compact('message', 'htmlContent'));
+        return view('public.messages.show', compact('message'));
     }
 }
