@@ -24,7 +24,7 @@ Route::get('/snippets/create', function () {
 
 // Show Snippets
 Route::get('/snippets/{snippet}', [SnippetController::class, 'show'])
-    ->name('messages.show');
+    ->name('snippets.show');
 
 
 // System information

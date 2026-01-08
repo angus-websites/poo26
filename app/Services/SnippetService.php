@@ -19,7 +19,7 @@ class SnippetService
      * @param  string  $content  The content of the message
      * @param  string|null  $language  The programming language of the snippet (optional)
      */
-    public function create(string $content, ?string $language): Snippet
+    public function create(string $content, ?string $language = null): Snippet
     {
         return $this->snippetRepository->create([
             'content' => $content,
