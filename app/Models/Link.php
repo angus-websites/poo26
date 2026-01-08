@@ -25,7 +25,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  *
  * @property-read bool $is_expired
- * @property-read Destination $link
+ * @property-read Destination $destination
  *
  */
 class Link extends Model
@@ -68,6 +68,14 @@ class Link extends Model
     public function getIsExpiredAttribute(): bool
     {
         return $this->expires_at?->isPast() ?? false;
+    }
+
+    /**
+     * Determine if the link is active and not expired.
+     */
+    public function isActiveAndNotExpired(): bool
+    {
+        return $this->is_active && ! $this->is_expired;
     }
 
     /**

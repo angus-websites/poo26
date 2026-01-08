@@ -1,9 +1,7 @@
 <?php
 
 use App\Contracts\CodeRepositoryInterface;
-use App\Contracts\LinkRepositoryInterface;
 use App\Exceptions\CodeGeneratorException;
-use App\Models\Destination;
 use App\Services\Util\CodeGeneratorService;
 use Illuminate\Support\Str;
 use Mockery\Mock;
