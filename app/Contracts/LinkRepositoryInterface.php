@@ -18,14 +18,9 @@ interface LinkRepositoryInterface
     public function findById(int $id): ?Link;
 
     /**
-     * Find a link by slug.
-     */
-    public function findBySlug(string $slug): ?Link;
-
-    /**
      * Find a link by URL hash.
      */
-    public function findPermanentByHash(string $hash): ?Link;
+    public function findByHash(string $hash): ?Link;
 
     /**
      * Get all links (optionally paginated later).

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('slugs', function (Blueprint $table) {
             $table->id();
-            $table->string('slug')->unique();
+            $table->string('code')->unique();
             $table->foreignId('link_id')->constrained('links')->cascadeOnDelete();
             $table->boolean('is_active')->default(true);
             $table->timestamp('expires_at')->nullable();

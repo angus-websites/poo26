@@ -14,7 +14,7 @@ use Illuminate\Support\Carbon;
  * i.e. the part after the domain in a shortened URL.
  *
  * @property int $id
- * @property string $slug
+ * @property string $code
  * @property int $link_id
  * @property bool $is_active
  * @property Carbon|null $expires_at
@@ -33,7 +33,7 @@ class Slug extends Model
     use HasFactory;
 
     protected $fillable = [
-        'slug',
+        'code',
         'link_id',
         'is_active',
         'expires_at',
