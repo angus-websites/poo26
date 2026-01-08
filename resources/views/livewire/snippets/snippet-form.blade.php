@@ -7,15 +7,48 @@ use Livewire\Volt\Component;
 new class extends Component {
 
     public string $snippet = '';
-    public string $language = '';
+    public string $language = 'plaintext';
 
 
     protected function rules(): array
     {
+        $languages = array_merge(
+            array_keys(config('snippets.languages.core', [])),
+            array_keys(config('snippets.languages.syntax', [])),
+        );
+
         return [
             'snippet' => ['required', 'string', 'max:5000'],
-            'language' => ['nullable', Rule::in(array_keys(config('snippets.languages')))],
+            'language' => ['nullable', Rule::in($languages)],
         ];
+    }
+
+
+    /**
+     * The core languages like plaintext, etc.
+     * without syntax highlighting.
+     * @return array<string, array{label: string, icon?: string}>
+     */
+    public function getCoreLanguagesProperty(): array
+    {
+        $coreLanguages = config('snippets.languages')['core'] ?? [];
+
+        uasort($coreLanguages, fn($a, $b) => strcasecmp($a['label'], $b['label']));
+
+        return $coreLanguages;
+    }
+
+    /**
+     * Get all available languages. with syntax highlighting.
+     * @return array<string, array{label: string, icon?: string}>
+     */
+    public function getLanguagesProperty(): array
+    {
+        $languages = config('snippets.languages')['syntax'] ?? [];
+
+        uasort($languages, fn($a, $b) => strcasecmp($a['label'], $b['label']));
+
+        return $languages;
     }
 
 
@@ -57,14 +90,27 @@ new class extends Component {
         <flux:field>
             <flux:label>Select a programming language</flux:label>
             <flux:select wire:model="language" variant="listbox" searchable placeholder="Select language...">
-                @foreach(config('snippets.languages') as $key => $info)
+                @foreach($this->coreLanguages as $key => $info)
                     <flux:select.option value="{{ $key }}">
                         <div class="flex items-center gap-2">
+                            @isset($info['icon'])
                             <i class="{{$info['icon']}}"></i>
+                            @endisset
                             <span>{{ $info['label'] }}</span>
                         </div>
                     </flux:select.option>
                 @endforeach
+                @foreach($this->languages as $key => $info)
+                    <flux:select.option value="{{ $key }}">
+                        <div class="flex items-center gap-2">
+                            @isset($info['icon'])
+                                <i class="{{$info['icon']}}"></i>
+                            @endisset
+                            <span>{{ $info['label'] }}</span>
+                        </div>
+                    </flux:select.option>
+                @endforeach
+
             </flux:select>
             <flux:error name="language"/>
         </flux:field>

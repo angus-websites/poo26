@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Contracts\SnippetRepositoryInterface;
 use App\Exceptions\SlugException;
 use App\Models\Snippet;
+use Spatie\ShikiPhp\Shiki;
 
 class SnippetService
 {
@@ -25,6 +26,35 @@ class SnippetService
             'content' => $content,
             'language' => $language,
         ]);
+    }
+
+    /**
+     * Generate HTML content for a snippet with syntax highlighting
+     * @param Snippet $snippet The snippet model
+     * @return string The HTML content with syntax highlighting
+     */
+    public function generateHtmlContent(Snippet $snippet): string
+    {
+        return Shiki::highlight(
+            code: $snippet->content,
+            language: $snippet->language,
+            theme: config('snippets.themes')
+        );
+    }
+
+    /**
+     * Get the human-readable name of a programming language
+     * If not found, return the original language code
+     * @param string $languageCode
+     * @return string The human-readable name of the programming language
+     */
+    public function getLanguageName(string $languageCode): string
+    {
+        return collect(config('snippets.languages'))
+            ->flatMap(fn($group) => $group)
+            ->get($languageCode)['label']
+            ?? $languageCode;
+
     }
 
     /**
