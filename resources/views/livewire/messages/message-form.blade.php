@@ -47,6 +47,7 @@ new class extends Component {
                 wire:model.defer="message"
                 required
                 label="Enter your message"
+                badge="Markdown supported"
                 placeholder="Your message here..."
             />
         </div>
