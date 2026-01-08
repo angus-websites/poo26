@@ -11,11 +11,14 @@ use Illuminate\Support\Carbon;
 
 class LinkService
 {
+    protected CodeGeneratorService $codeGeneratorService;
+
     public function __construct(
         protected LinkRepositoryInterface $linkRepository,
         protected DestinationService $destinationService,
-        protected CodeGeneratorService $codeGeneratorService
-    ) {}
+    ) {
+        $this->codeGeneratorService = new CodeGeneratorService($linkRepository);
+    }
 
     /**
      * Create a new shortened link.

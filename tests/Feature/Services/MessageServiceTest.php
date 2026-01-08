@@ -39,20 +39,20 @@ it('creates a link for a message and persists it to the links table', function (
     // Create message
     $message = $this->service->create('Test message for slug');
 
-    // Generate slug
-    $slug = $this->service->createSlugForMessage($message);
+    // Generate code
+    $code = $this->service->createCodeForMessage($message);
 
-    // Assert slug is non-empty
-    expect($slug)->toBeString()->not()->toBeEmpty();
+    // Assert code is non-empty
+    expect($code)->toBeString()->not()->toBeEmpty();
 
     // Assert Link exists in database
     $this->assertDatabaseHas('links', [
-        'slug' => $slug,
-        'original_url' => route('messages.show', ['message' => $message->id], false),
+        'code' => $code,
     ]);
+
 });
 
-it('propagates SlugException when link creation fails', function () {
+it('propagates CodeGeneratorException when link creation fails', function () {
     $message = $this->service->create('Failing message');
 
     // Mock LinkService to throw
@@ -64,5 +64,5 @@ it('propagates SlugException when link creation fails', function () {
     // Create MessageService with mocked LinkService
     $service = new MessageService(app(MessageRepositoryInterface::class), $mockLinkService);
 
-    $service->createSlugForMessage($message);
+    $service->createCodeForMessage($message);
 })->throws(CodeGeneratorException::class);

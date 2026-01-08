@@ -17,7 +17,7 @@ new class extends Component {
 
         try {
             $message = $messageService->create($this->message);
-            $shortUrl = $messageService->createSlugForMessage($message);
+            $shortUrl = $messageService->createCodeForMessage($message);
         } catch (Exception) {
             session()->flash('error', 'Failed to create message. Please try again.');
             return;
@@ -43,7 +43,7 @@ new class extends Component {
         </div>
 
         <flux:field>
-            <flux:label  badge="Markdown supported">Enter your message</flux:label>
+            <flux:label badge="Markdown supported">Enter your message</flux:label>
             <flux:textarea
                 wire:model.defer="message"
                 required

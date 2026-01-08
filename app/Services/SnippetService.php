@@ -62,16 +62,16 @@ class SnippetService
      * Create a URL for accessing the snippet
      *
      * @param  Snippet  $snippet  The snippet model to create the link for
-     * @return string The slug of the created link
+     * @return string The code of the created link
      *
      * @throws CodeGeneratorException
      */
-    public function createSlugForSnippet(Snippet $snippet): string
+    public function createCodeForSnippet(Snippet $snippet): string
     {
         $link = $this->linkService->create(
             route('snippets.show', ['snippet' => $snippet->id], false)
         );
 
-        return $link->slug;
+        return $link->code;
     }
 }

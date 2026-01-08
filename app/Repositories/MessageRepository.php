@@ -26,6 +26,7 @@ class MessageRepository implements MessageRepositoryInterface
     public function update(Message $message, array $data): Message
     {
         $message->update($data);
+        return $message;
     }
 
     public function delete(Message $message): bool

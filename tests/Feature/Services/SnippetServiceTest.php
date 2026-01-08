@@ -43,7 +43,7 @@ it('creates a link for a snippet and persists it to the links table', function (
     $snippet = $this->service->create('hello world');
 
     // Generate slug
-    $slug = $this->service->createSlugForSnippet($snippet);
+    $slug = $this->service->createCodeForSnippet($snippet);
 
     // Assert slug is non-empty
     expect($slug)->toBeString()->not()->toBeEmpty();
@@ -67,5 +67,5 @@ it('propagates SlugException when link creation fails', function () {
     // Create SnippetService with mocked LinkService
     $service = new SnippetService(app(SnippetRepositoryInterface::class), $mockLinkService);
 
-    $service->createSlugForSnippet($snippet);
+    $service->createCodeForSnippet($snippet);
 })->throws(CodeGeneratorException::class);
