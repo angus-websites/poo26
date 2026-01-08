@@ -5,17 +5,18 @@ declare(strict_types=1);
 namespace Database\Factories;
 
 use App\Models\Destination;
+use App\Models\Link;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
 class LinkFactory extends Factory
 {
-    protected $model = Destination::class;
+    protected $model = Link::class;
 
     public function definition(): array
     {
         return [
-            'destination' => Destination::factory(),
+            'destination_id' => Destination::factory(),
             'is_active' => true,
             'expires_at' => null,
             'clicks' => 0,
@@ -53,6 +54,18 @@ class LinkFactory extends Factory
             'last_accessed' => Carbon::now()->subMinutes(
                 $this->faker->numberBetween(1, 1440)
             ),
+        ]);
+    }
+
+    /**
+     * Useful to create a link for a specific URL.
+     * @param string $url
+     * @return $this
+     */
+    public function forUrl(string $url): static
+    {
+        return $this->state(fn() => [
+            'destination_id' => Destination::factory()->forUrl($url),
         ]);
     }
 }

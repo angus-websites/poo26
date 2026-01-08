@@ -21,7 +21,7 @@ class DestinationRepository implements DestinationRepositoryInterface
 
     public function findByHash(string $hash): ?Destination
     {
-        return Destination::where('hash', $hash)->first();
+        return Destination::where('url_hash', $hash)->first();
     }
 
     public function all(): Collection

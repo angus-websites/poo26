@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Services\Util\SlugService;
 use Database\Factories\LinkFactory;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -28,9 +29,9 @@ use Illuminate\Support\Carbon;
  * @property-read Destination $destination
  *
  */
+#[UseFactory(LinkFactory::class)]
 class Link extends Model
 {
-    /** @use HasFactory<LinkFactory> */
     use HasFactory;
 
     protected $fillable = [

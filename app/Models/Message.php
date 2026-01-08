@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Database\Factories\MessageFactory;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,9 +17,9 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */
+#[UseFactory(MessageFactory::class)]
 class Message extends Model
 {
-    /** @use HasFactory<MessageFactory> */
     use HasFactory;
 
     use HasUuids;

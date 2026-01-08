@@ -42,20 +42,19 @@ it('creates a link for a snippet and persists it to the links table', function (
     // Create snippet
     $snippet = $this->service->create('hello world');
 
-    // Generate slug
-    $slug = $this->service->createCodeForSnippet($snippet);
+    // Generate code
+    $code = $this->service->createCodeForSnippet($snippet);
 
     // Assert slug is non-empty
-    expect($slug)->toBeString()->not()->toBeEmpty();
+    expect($code)->toBeString()->not()->toBeEmpty();
 
     // Assert Link exists in database
     $this->assertDatabaseHas('links', [
-        'slug' => $slug,
-        'original_url' => route('snippets.show', ['snippet' => $snippet->id], false),
+        'code' => $code,
     ]);
 });
 
-it('propagates SlugException when link creation fails', function () {
+it('propagates CodeGeneratorException when link creation fails', function () {
     $snippet = $this->service->create('bad snippet content');
 
     // Mock LinkService to throw

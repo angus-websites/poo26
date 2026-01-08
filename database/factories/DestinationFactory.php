@@ -10,6 +10,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class DestinationFactory extends Factory
 {
+
+    protected $model = Destination::class;
+
     /**
      * Define the model's default state.
      *
@@ -17,9 +20,19 @@ class DestinationFactory extends Factory
      */
     public function definition(): array
     {
+        $url = $this->faker->url();
+
         return [
-            'url' => $this->faker->url(),
-            'url_hash' => hash('sha256', $this->faker->url()),
+            'url' => $url,
+            'url_hash' => hash('sha256', $url),
         ];
+    }
+
+    public function forUrl(string $url): static
+    {
+        return $this->state(fn() => [
+            'url' => $url,
+            'url_hash' => hash('sha256', $url),
+        ]);
     }
 }
