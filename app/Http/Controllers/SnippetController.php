@@ -21,8 +21,13 @@ class SnippetController extends Controller
     public function show(Snippet $snippet): Factory|View
     {
         $htmlContent = $this->snippetService->generateHtmlContent($snippet);
+        $rawContent = $snippet->content;
         $languageName = $this->snippetService->getLanguageName($snippet->language);
 
-        return view('public.snippets.show', ['htmlContent' => $htmlContent, 'languageName' => $languageName]);
+        return view('public.snippets.show', [
+            'htmlContent' => $htmlContent,
+            'languageName' => $languageName,
+            'rawContent' => $rawContent,
+        ]);
     }
 }
