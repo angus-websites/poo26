@@ -2,13 +2,13 @@
 
 namespace App\Providers;
 
+use App\Contracts\DestinationRepositoryInterface;
 use App\Contracts\LinkRepositoryInterface;
 use App\Contracts\MessageRepositoryInterface;
-use App\Contracts\SlugRepositoryInterface;
 use App\Contracts\SnippetRepositoryInterface;
+use App\Repositories\DestinationRepository;
 use App\Repositories\LinkRepository;
 use App\Repositories\MessageRepository;
-use App\Repositories\SlugRepository;
 use App\Repositories\SnippetRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,8 +25,8 @@ class AppServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
-            SlugRepositoryInterface::class,
-            SlugRepository::class
+            DestinationRepositoryInterface::class,
+            DestinationRepository::class
         );
 
         $this->app->bind(

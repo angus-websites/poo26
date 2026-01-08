@@ -3,6 +3,7 @@
 namespace App\Contracts;
 
 use App\Models\Destination;
+use App\Models\Link;
 use Illuminate\Support\Collection;
 
 interface LinkRepositoryInterface
@@ -10,30 +11,30 @@ interface LinkRepositoryInterface
     /**
      * Create a new short link.
      */
-    public function create(array $data): Destination;
+    public function create(array $data): Link;
 
     /**
      * Find a link by ID.
      */
-    public function findById(int $id): ?Destination;
+    public function findById(int $id): ?Link;
 
     /**
-     * Find a link by URL hash.
+     * Find a link by the code
      */
-    public function findByHash(string $hash): ?Destination;
+    public function findByCode(string $code): ?Link;
 
     /**
-     * Get all links (optionally paginated later).
+     * Get all links
      */
     public function all(): Collection;
 
     /**
      * Update a link.
      */
-    public function update(Destination $link, array $data): Destination;
+    public function update(Link $link, array $data): Link;
 
     /**
      * Delete a link.
      */
-    public function delete(Destination $link): bool;
+    public function delete(Link $link): bool;
 }
