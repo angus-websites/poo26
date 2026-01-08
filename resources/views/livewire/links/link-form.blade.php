@@ -3,6 +3,7 @@
 use App\Exceptions\CodeGeneratorException;
 use App\Services\LinkService;
 use Livewire\Volt\Component;
+use App\Services\Util\UrlNormalizerService;
 
 new class extends Component {
 
@@ -14,6 +15,10 @@ new class extends Component {
 
     public function submit(LinkService $linkService): void
     {
+        // Normalize the URL
+        $this->url = UrlNormalizerService::normalize($this->url);
+
+        // Validate the input
         $this->validate();
 
         try {
@@ -47,7 +52,11 @@ new class extends Component {
 
         <flux:field>
             <flux:label>Enter URL to shorten</flux:label>
-            <flux:input wire:model.defer="url" required icon="link" type="url"
+            <flux:input wire:model.defer="url"
+                        required
+                        icon="link"
+                        inputmode="url"
+                        type="text"
                         placeholder="https://example.com"/>
             <flux:error name="url"/>
         </flux:field>
