@@ -1,0 +1,77 @@
+name: CD Pipeline
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+env:
+  IMAGE_NAME: poo26
+  REGISTRY: ghcr.io
+
+concurrency:
+  group: cd-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    environment: production
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      # Checkout code (latest checkout)
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Convert repository name to lowercase inline
+      - name: Set repository name
+        run: echo "REPO_NAME=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
+      # Log in to GitHub Container Registry
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Extract metadata for Docker image
+      - name: Docker metadata
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=semver,pattern={{version}}
+          labels: |
+            org.opencontainers.image.source=${{ github.repository }}
+
+      # Build and push Docker image
+      - name: Build and push Docker image
+        id: docker
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:cache
+          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:cache,mode=max
+          # Authenticate to private Composer repositories
+          secrets: |
+           COMPOSER_AUTH=${{ secrets.COMPOSER_AUTH }}
+
+      # Deploy to CapRover
+      - name: Deploy to CapRover
+        uses: caprover/deploy-from-github@v1.1.2
+        with:
+          server: ${{ secrets.CAP_SERVER_URL }}
+          app: ${{ secrets.CAP_APP_NAME }}
+          token: ${{ secrets.CAP_APP_TOKEN }}
+          image: ${{ env.REGISTRY }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.version }}
