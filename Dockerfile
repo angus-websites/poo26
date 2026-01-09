@@ -48,15 +48,15 @@ COPY . /var/www/html
 WORKDIR /var/www/html
 
 # Copy our prod script and set permissions
-COPY start.sh /start.sh
+COPY server/start.sh /start.sh
 RUN chmod +x /start.sh
 
 # Remove the 'tests' directory
 RUN rm -rf /var/www/html/tests
 
 # Copy supervisor configs
-COPY supervisord.conf /etc/supervisord.conf
-COPY queue-worker.conf /etc/supervisor/conf.d/queue-worker.conf
+COPY server/supervisord.conf /etc/supervisord.conf
+COPY server/queue-worker.conf /etc/supervisor/conf.d/queue-worker.conf
 
 
 CMD ["sh", "/start.sh"]

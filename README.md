@@ -4,6 +4,7 @@
 
 - [ ] Temp link option
 - [ ] Admin panel
+- Document Models and improve README
 
 ## Useful commands
 
