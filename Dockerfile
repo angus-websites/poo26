@@ -5,9 +5,9 @@ RUN apk add --no-cache icu-dev \
 WORKDIR /app
 COPY . .
 
-# Auth needed for private repositories
-RUN --mount=type=secret,id=composer_auth \
-    COMPOSER_AUTH="$(cat /run/secrets/composer_auth)" \
+# Auth using auth.json
+RUN --mount=type=secret,id=composer-auth \
+    COMPOSER_AUTH=$(cat /run/secrets/composer-auth) \
     composer install \
       --no-interaction \
       --no-dev \

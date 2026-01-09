@@ -53,22 +53,16 @@ jobs:
           labels: |
             org.opencontainers.image.source=${{ github.repository }}
 
-      # 🔐 Build Composer auth JSON from secrets
-      - name: Build Composer auth
-        run: |
-          echo "COMPOSER_AUTH={\"http-basic\":{\"composer.fluxui.dev\":{\"username\":\"${{ secrets.FLUX_USERNAME }}\",\"password\":\"${{ secrets.FLUX_LICENSE_KEY }}\"}}}" >> $GITHUB_ENV
-      
-
       # Build & push image
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v5
+      - name: Build and push
+        uses: docker/build-push-action@v6
         with:
           context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           secrets: |
-            COMPOSER_AUTH=${{ env.COMPOSER_AUTH }}
+            COMPOSER_AUTH=${{ secrets.COMPOSER_AUTH }}
 
       # Deploy to CapRover
       - name: Deploy to CapRover

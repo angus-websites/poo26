@@ -25,7 +25,13 @@ php artisan test --parallel
 ## Building
 
 ```bash
+DOCKER_BUILDKIT=1
 docker build \
   --secret id=composer_auth,src=auth.json \
   -t poo26 .
 ```
+
+```bash
+DOCKER_BUILDKIT=1 docker build --secret id=composer-auth,env=COMPOSER_AUTH . 
+```
+
