@@ -15,7 +15,7 @@ Command to update UI snapshots:
 php artisan test --update-snapshots
 ```
 
-Run tests in parallell
+Run tests in parallel
 
 ```bash
 php artisan test --parallel
