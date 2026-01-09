@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Contracts\MessageRepositoryInterface;
 use App\Exceptions\CodeGeneratorException;
 use App\Models\Message;
+use Stevebauman\Purify\Facades\Purify;
 
 class MessageService
 {
@@ -25,6 +26,20 @@ class MessageService
                 'content' => $content,
             ]
         );
+    }
+
+    /**
+     * Generate HTML content from Markdown for a message
+     * @param Message $message
+     * @return string The HTML content
+     */
+    public function generateHtmlContent(Message $message): string
+    {
+        // Convert Markdown content to HTML
+        $htmlContent = new \Spatie\LaravelMarkdown\MarkdownRenderer()->toHtml($message->content);
+
+        // Purify the HTML content
+        return Purify::clean($htmlContent);
     }
 
     /**

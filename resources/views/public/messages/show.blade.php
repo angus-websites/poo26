@@ -3,9 +3,7 @@
         <div class="max-w-3xl mx-auto">
             <flux:card class="space-y-6">
                 <article class="prose dark:prose-invert">
-                    <x-markdown>
-                        {!! $message->content !!}
-                    </x-markdown>
+                    {!! $content !!}
                 </article>
             </flux:card>
         </div>
