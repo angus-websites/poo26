@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Services\Util\SlugService;
+use App\Services\Util\CodeGeneratorService;
 use Database\Factories\LinkFactory;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -56,7 +56,12 @@ class Link extends Model
 
             // Auto generate if no code provided
             if (!$link->code) {
-                $link->code = app(SlugService::class)->generate();
+                $link->code = app(CodeGeneratorService::class)->generate();
+            }
+
+            // If last accessed not set, set to now
+            if (!$link->last_accessed) {
+                $link->last_accessed = now();
             }
         });
     }
@@ -80,7 +85,7 @@ class Link extends Model
     }
 
     /**
-     * Get the link that owns the slug.
+     * Get the destination that owns the link.
      * i.e. the original URL.
      */
     public function destination(): BelongsTo

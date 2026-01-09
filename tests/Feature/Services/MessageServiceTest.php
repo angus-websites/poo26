@@ -37,7 +37,7 @@ it('creates a message and persists it to the database', function () {
 it('creates a link for a message and persists it to the links table', function () {
 
     // Create message
-    $message = $this->service->create('Test message for slug');
+    $message = $this->service->create('Test message');
 
     // Generate code
     $code = $this->service->createCodeForMessage($message);

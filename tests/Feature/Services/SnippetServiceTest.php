@@ -45,7 +45,7 @@ it('creates a link for a snippet and persists it to the links table', function (
     // Generate code
     $code = $this->service->createCodeForSnippet($snippet);
 
-    // Assert slug is non-empty
+    // Assert code is non-empty
     expect($code)->toBeString()->not()->toBeEmpty();
 
     // Assert Link exists in database

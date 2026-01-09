@@ -7,6 +7,10 @@ use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Translation\PotentiallyTranslatedString;
 
+/**
+ * Validation rule to check if a given value is a valid public URL.
+ * this differs from a standard URL validation by ensuring the URL contains a valid host with at least one dot.
+ */
 class PublicUrl implements ValidationRule
 {
     /**
