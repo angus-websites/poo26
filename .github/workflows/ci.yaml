@@ -1,22 +1,43 @@
-name: tests
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+name: CI Pipeline
 
 on:
-  workflow_call:
-    inputs:
-      run_id:
-        required: false
-        type: string
+  pull_request:
+    branches:
+      - '*'  # all PRs
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  ci:
+  # Composer version check
+  composer-check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      passed: ${{ steps.check.outcome }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up UV
+        uses: astral-sh/setup-uv@v6
+
+      - name: Check version in composer.json
+        id: check
+        run: |
+          uv run python .github/scripts/check_version.py
+
+  # Test job, runs only if composer check succeeds
+  tests:
+    needs: composer-check
+    if: ${{ needs.composer-check.result == 'success' }}
     runs-on: ubuntu-latest
     environment: Testing
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup PHP
@@ -41,7 +62,7 @@ jobs:
       - name: Add Flux Credentials Loaded From ENV
         run: composer config http-basic.composer.fluxui.dev "${{ secrets.FLUX_USERNAME }}" "${{ secrets.FLUX_LICENSE_KEY }}"
 
-      - name: Install Dependencies
+      - name: Install Composer Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
       - name: Copy Environment File
