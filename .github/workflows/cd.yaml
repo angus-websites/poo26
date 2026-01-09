@@ -62,7 +62,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           secrets: |
-            COMPOSER_AUTH=${{ secrets.COMPOSER_AUTH }}
+            composer_auth=${{ secrets.COMPOSER_AUTH }}
 
       # Deploy to CapRover
       - name: Deploy to CapRover

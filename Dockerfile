@@ -7,7 +7,7 @@ COPY . .
 
 # Auth using auth.json
 RUN --mount=type=secret,id=composer_auth \
-    COMPOSER_AUTH=$(cat /run/secrets/composer_auth) \
+    export COMPOSER_AUTH="$(cat /run/secrets/composer_auth)" && \
     composer install \
       --no-interaction \
       --no-dev \
