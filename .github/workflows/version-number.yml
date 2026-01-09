@@ -1,0 +1,24 @@
+name: Check Composer Version
+
+on:
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  uv-example:
+    permissions:
+      contents: read
+    name: Python
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up UV
+        uses: astral-sh/setup-uv@v6
+
+      - name: Check version in composer.json
+        run: |
+          uv run python .github/scripts/check_version.py
