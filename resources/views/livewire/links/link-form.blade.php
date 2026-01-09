@@ -63,6 +63,8 @@ new class extends Component {
                         icon="link"
                         inputmode="url"
                         type="text"
+                        pattern=".*\S.*"
+                        title="Url must not be empty or contain only whitespace"
                         placeholder="https://example.com"/>
             <flux:error name="url"/>
         </flux:field>
