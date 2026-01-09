@@ -1,7 +1,7 @@
 <x-layouts.minimal>
     <x-page-container>
         <div class="max-w-3xl mx-auto" x-data="{ content: @js($rawContent) }">
-            <flux:card class="dark:bg-[#282A36]">
+            <flux:card class="dark:bg-[#282A36] overflow-hidden">
                 <flux:heading class="flex items-center gap-2">
                     Language: {{ $languageName }}
 
@@ -27,7 +27,7 @@
 
                 <flux:separator class="my-5"/>
 
-                <div id="snippet-content">
+                <div id="snippet-content" class="overflow-x-scroll">
                     {!! $htmlContent !!}
                 </div>
             </flux:card>
