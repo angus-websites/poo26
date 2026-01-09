@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Models\Destination;
 use App\Models\Link;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Str;
 
 class LinkFactory extends Factory
 {
@@ -16,11 +16,10 @@ class LinkFactory extends Factory
     public function definition(): array
     {
         return [
-            'slug' => Str::random(8),
-            'original_url' => $this->faker->url(),
-            'clicks' => 0,
+            'destination_id' => Destination::factory(),
             'is_active' => true,
             'expires_at' => null,
+            'clicks' => 0,
             'last_accessed' => null,
         ];
     }
@@ -55,6 +54,18 @@ class LinkFactory extends Factory
             'last_accessed' => Carbon::now()->subMinutes(
                 $this->faker->numberBetween(1, 1440)
             ),
+        ]);
+    }
+
+    /**
+     * Useful to create a link for a specific URL.
+     *
+     * @return $this
+     */
+    public function forUrl(string $url): static
+    {
+        return $this->state(fn () => [
+            'destination_id' => Destination::factory()->forUrl($url),
         ]);
     }
 }

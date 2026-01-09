@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Contracts\DestinationRepositoryInterface;
 use App\Contracts\LinkRepositoryInterface;
 use App\Contracts\MessageRepositoryInterface;
 use App\Contracts\SnippetRepositoryInterface;
+use App\Repositories\DestinationRepository;
 use App\Repositories\LinkRepository;
 use App\Repositories\MessageRepository;
 use App\Repositories\SnippetRepository;
@@ -20,6 +22,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             LinkRepositoryInterface::class,
             LinkRepository::class
+        );
+
+        $this->app->bind(
+            DestinationRepositoryInterface::class,
+            DestinationRepository::class
         );
 
         $this->app->bind(

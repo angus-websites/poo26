@@ -11,9 +11,9 @@ new class extends Component {
     public string $stage = 'form';
 
     /**
-     * The generated short URL
+     * The generated URL code
      */
-    public ?string $shortUrl = null;
+    public ?string $urlCode = null;
 
     protected $listeners = [
         'link:shortened' => 'onLinkShortened',
@@ -22,13 +22,13 @@ new class extends Component {
 
     public function onLinkShortened(array $payload): void
     {
-        $this->shortUrl = $payload['short_url'] ?? null;
+        $this->urlCode = $payload['url_code'] ?? null;
         $this->stage = 'result';
     }
 
     public function resetFlow(): void
     {
-        $this->reset(['shortUrl']);
+        $this->reset(['urlCode']);
         $this->stage = 'form';
     }
 };
@@ -39,7 +39,7 @@ new class extends Component {
     @if ($stage === 'form')
         <livewire:links.link-form/>
     @elseif($stage === 'result')
-        <livewire:links.link-results :shortUrl="$shortUrl"/>
+        <livewire:links.link-results :urlCode="$urlCode"/>
     @endif
 
 </flux:card>

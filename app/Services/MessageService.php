@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Contracts\MessageRepositoryInterface;
-use App\Exceptions\SlugException;
+use App\Exceptions\CodeGeneratorException;
 use App\Models\Message;
 
 class MessageService
@@ -31,16 +31,16 @@ class MessageService
      * Create a URL for accessing the message
      *
      * @param  Message  $message  The message to create a URL for
-     * @return string The slug of the created link
+     * @return string The code of the created link
      *
-     * @throws SlugException
+     * @throws CodeGeneratorException
      */
-    public function createSlugForMessage(Message $message): string
+    public function createCodeForMessage(Message $message): string
     {
         $link = $this->linkService->create(
             route('messages.show', ['message' => $message->id], false)
         );
 
-        return $link->slug;
+        return $link->code;
     }
 }

@@ -18,17 +18,9 @@ class LinkRepository implements LinkRepositoryInterface
         return Link::find($id);
     }
 
-    public function findBySlug(string $slug): ?Link
+    public function findByCode(string $code): ?Link
     {
-        return Link::where('slug', $slug)
-            ->first();
-    }
-
-    public function findPermanentByHash(string $hash): ?Link
-    {
-        return Link::permanent()
-            ->where('url_hash', $hash)
-            ->first();
+        return Link::where('code', $code)->first();
     }
 
     public function all(): Collection
@@ -45,6 +37,6 @@ class LinkRepository implements LinkRepositoryInterface
 
     public function delete(Link $link): bool
     {
-        return (bool) $link->delete();
+        return $link->delete();
     }
 }

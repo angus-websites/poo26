@@ -58,7 +58,7 @@ new class extends Component {
 
         try {
             $message = $snippetService->create($this->snippet, $this->language);
-            $shortUrl = $snippetService->createSlugForSnippet($message);
+            $urlCode = $snippetService->createCodeForSnippet($message);
         } catch (Exception) {
             session()->flash('error', 'Failed to create snippet. Please try again.');
             return;
@@ -66,7 +66,7 @@ new class extends Component {
 
         // Emit the shortened Message event
         $this->dispatch('snippet:shortened', [
-            'short_url' => $shortUrl,
+            'url_code' => $urlCode,
         ]);
 
         // Reset the form
@@ -94,7 +94,7 @@ new class extends Component {
                     <flux:select.option value="{{ $key }}">
                         <div class="flex items-center gap-2">
                             @isset($info['icon'])
-                            <i class="{{$info['icon']}}"></i>
+                                <i class="{{$info['icon']}}"></i>
                             @endisset
                             <span>{{ $info['label'] }}</span>
                         </div>
@@ -119,9 +119,9 @@ new class extends Component {
         <flux:field>
             <flux:label>Enter your code</flux:label>
             <flux:textarea
-                wire:model.defer="snippet"
-                required
-                placeholder="print('Hello, World!')"
+                    wire:model.defer="snippet"
+                    required
+                    placeholder="print('Hello, World!')"
             />
             <flux:error name="snippet"/>
             <flux:description>

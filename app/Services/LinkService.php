@@ -3,17 +3,22 @@
 namespace App\Services;
 
 use App\Contracts\LinkRepositoryInterface;
+use App\Exceptions\CodeGeneratorException;
 use App\Exceptions\InvalidLinkException;
-use App\Exceptions\SlugException;
 use App\Models\Link;
+use App\Services\Util\CodeGeneratorService;
 use Illuminate\Support\Carbon;
 
 class LinkService
 {
+    protected CodeGeneratorService $codeGeneratorService;
+
     public function __construct(
         protected LinkRepositoryInterface $linkRepository,
-        protected SlugService $slugService
-    ) {}
+        protected DestinationService $destinationService,
+    ) {
+        $this->codeGeneratorService = new CodeGeneratorService($linkRepository);
+    }
 
     /**
      * Create a new shortened link.
@@ -21,30 +26,22 @@ class LinkService
      * @param  string  $originalUrl  The original URL to shorten.
      * @return Link The created Link model.
      *
-     * @throws SlugException
+     * @throws CodeGeneratorException
      */
     public function create(string $originalUrl): Link
     {
+        // Create the destination
+        $destination = $this->destinationService->create($originalUrl);
 
-        // Compute URL hash
-        $hash = hash('sha256', $originalUrl);
+        // Generate a unique code
+        $code = $this->codeGeneratorService->generate();
 
-        // See if this URL has already been shortened
-        $existing = $this->linkRepository->findPermanentByHash($hash);
-
-        // Return existing link if found
-        if ($existing) {
-            return $existing;
-        }
-
-        // Save to repository
-        return $this->linkRepository->create(
-            [
-                'original_url' => $originalUrl,
-                'slug' => $this->slugService->generate(),
-                'url_hash' => $hash,
-            ]
-        );
+        // Create the link
+        return $this->linkRepository->create([
+            'code' => $code,
+            'destination_id' => $destination->id,
+            'is_active' => true,
+        ]);
 
     }
 
@@ -56,8 +53,7 @@ class LinkService
     public function resolve(Link $link): string
     {
 
-        // Check if link is not active or expired
-        if (! $link->is_active || ($link->expires_at && $link->is_expired)) {
+        if (! $link->isActiveAndNotExpired()) {
             throw new InvalidLinkException(
                 'The link is either inactive or has expired.'
             );
@@ -67,7 +63,7 @@ class LinkService
         $this->trackAccess($link);
 
         // Return the original URL
-        return $link->original_url;
+        return $link->destination->url;
     }
 
     /**

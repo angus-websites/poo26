@@ -1,19 +1,30 @@
 <?php
 
-use App\Exceptions\SlugException;
+use App\Exceptions\CodeGeneratorException;
+use App\Rules\PublicUrl;
 use App\Services\LinkService;
 use Livewire\Volt\Component;
+use App\Services\Util\UrlService;
 
 new class extends Component {
 
     public string $url = '';
 
-    protected array $rules = [
-        'url' => ['required', 'url', 'max:2048'],
-    ];
+
+    protected function rules(): array
+    {
+        return [
+            'url' => ['required', 'max:2048', new PublicUrl],
+        ];
+    }
+
 
     public function submit(LinkService $linkService): void
     {
+        // Normalize the URL
+        $this->url = UrlService::normalize($this->url);
+
+        // Validate the input
         $this->validate();
 
         try {
@@ -21,14 +32,14 @@ new class extends Component {
             $link = $linkService->create(
                 originalUrl: $this->url
             );
-        } catch (SlugException) {
+        } catch (CodeGeneratorException) {
             session()->flash('error', 'Failed to shorten the URL. Please try again.');
             return;
         }
 
         // Emit the shortened URL event
         $this->dispatch('link:shortened', [
-            'short_url' => $link->slug,
+            'url_code' => $link->code,
         ]);
 
         // Reset the form
@@ -46,8 +57,14 @@ new class extends Component {
         </div>
 
         <flux:field>
-            <flux:label >Enter URL to shorten</flux:label>
-            <flux:input wire:model.defer="url" required icon="link" type="url"
+            <flux:label>Enter URL to shorten</flux:label>
+            <flux:input wire:model.defer="url"
+                        required
+                        icon="link"
+                        inputmode="url"
+                        type="text"
+                        pattern=".*\S.*"
+                        title="Url must not be empty or contain only whitespace"
                         placeholder="https://example.com"/>
             <flux:error name="url"/>
         </flux:field>

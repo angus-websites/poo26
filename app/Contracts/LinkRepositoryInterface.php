@@ -5,7 +5,7 @@ namespace App\Contracts;
 use App\Models\Link;
 use Illuminate\Support\Collection;
 
-interface LinkRepositoryInterface
+interface LinkRepositoryInterface extends CodeRepositoryInterface
 {
     /**
      * Create a new short link.
@@ -18,17 +18,12 @@ interface LinkRepositoryInterface
     public function findById(int $id): ?Link;
 
     /**
-     * Find a link by slug.
+     * Find a link by the code
      */
-    public function findBySlug(string $slug): ?Link;
+    public function findByCode(string $code): ?Link;
 
     /**
-     * Find a link by URL hash.
-     */
-    public function findPermanentByHash(string $hash): ?Link;
-
-    /**
-     * Get all links (optionally paginated later).
+     * Get all links
      */
     public function all(): Collection;
 

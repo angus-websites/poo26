@@ -13,16 +13,13 @@ return new class extends Migration
     {
         Schema::create('links', function (Blueprint $table) {
             $table->id();
-            $table->string('slug')->unique();
-            $table->text('original_url');
-            $table->char('url_hash', 64);
-            $table->unsignedBigInteger('clicks')->default(0);
+            $table->string('code')->unique();
+            $table->foreignId('destination_id')->constrained('destinations')->cascadeOnDelete();
             $table->boolean('is_active')->default(true);
             $table->timestamp('expires_at')->nullable();
+            $table->unsignedBigInteger('clicks')->default(0);
             $table->timestamp('last_accessed')->nullable();
             $table->timestamps();
-
-            $table->unique(['url_hash', 'is_active', 'expires_at'], 'unique_active_permanent_links');
         });
     }
 

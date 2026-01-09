@@ -7,7 +7,7 @@ new class extends Component {
     /**
      * The shortened URL to display
      */
-    public string $shortUrl;
+    public string $urlCode;
 
     /**
      * Configurable UI text
@@ -16,14 +16,14 @@ new class extends Component {
     public string $backButtonText = 'Shorten again';
 
     public function mount(
-        string $shortUrl,
+        string $urlCode,
         ?string $heading = null,
         ?string $backButtonText = null,
     ): void
     {
 
         // Format the URL
-        $this->shortUrl = url($shortUrl);
+        $this->urlCode = url($urlCode);
 
         // Allow overrides, fall back to defaults
         if ($heading !== null) {
@@ -37,16 +37,16 @@ new class extends Component {
 };
 ?>
 
-<div class="space-y-6" x-data="{ url: $wire.entangle('$shortUrl') }" >
+<div class="space-y-6" x-data="{ url: $wire.entangle('urlCode') }" >
 
     <flux:heading size="lg">
         {{ $heading }}
     </flux:heading>
 
     <div class="space-y-2">
-        <label id="shortened-url-text"
+        <label id="short_url"
                class="text-center border-gray-200 dark:border-gray-200/10 border font-mono [&::selection]:bg-green-200 [&::selection]:text-green-900 text-zinc-500 dark:text-zinc-300 col-span-6 bg-white/10  text-sm rounded-lg block w-full px-2.5 py-4 truncate overflow-hidden">
-            {{ $shortUrl }}
+            {{ $urlCode }}
         </label>
     </div>
 
