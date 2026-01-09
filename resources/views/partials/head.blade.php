@@ -6,7 +6,7 @@
 <title>{{ $title ?? config('app.name') }}</title>
 <meta name="description"
       content="@yield('description', 'Poo (point of origin) is a modern URL shortener that allows you to shorten URLS, create messages and code snippets')"/>
-
+<meta property="og:image" content="{{ url('assets/images/core/ogimage.png') }}">
 
 {{--Icons--}}
 <link rel="icon" type="image/png" href="/assets/images/core/favicon-96x96.png" sizes="96x96"/>
