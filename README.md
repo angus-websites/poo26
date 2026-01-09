@@ -32,6 +32,6 @@ docker build \
 ```
 
 ```bash
-DOCKER_BUILDKIT=1 docker build --secret id=composer-auth,env=COMPOSER_AUTH . 
+DOCKER_BUILDKIT=1 docker build --secret id=composer_auth,env=COMPOSER_AUTH . 
 ```
 
