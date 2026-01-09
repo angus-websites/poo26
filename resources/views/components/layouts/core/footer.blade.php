@@ -1,4 +1,4 @@
-<footer aria-labelledby="footer-heading" >
+<footer aria-labelledby="footer-heading">
     <h2 id="footer-heading" class="sr-only">Footer</h2>
     <x-container class="pt-16 pb-8">
         <div class="border-t border-gray-200 dark:border-zinc-700 pt-8 md:flex md:items-center md:justify-between">
@@ -6,8 +6,12 @@
                 <flux:button x-data x-on:click="$flux.dark = ! $flux.dark" icon="moon" variant="subtle"
                              aria-label="Toggle dark mode"/>
             </div>
-            <p class="mt-8 text-base text-gray-500 md:order-1 md:mt-0 text-center">
-                &copy; {{ date('Y') }} Poo | Designed by Angus Goody
+            <p x-data="{}" class="mt-8 text-base text-gray-500 md:order-1 md:mt-0 text-center">
+                &copy; {{ date('Y') }}
+                <span
+                    class="cursor-pointer hover:text-accent"
+                    @click="window.location.href = '/admin'"
+                >Poo</span> | Designed by Angus Goody
             </p>
         </div>
     </x-container>
