@@ -1,8 +1,20 @@
 # ================ Stage 1: Composer dependencies =====================
 FROM composer:2 AS composer_prod
+RUN apk add --no-cache icu-dev \
+    && docker-php-ext-install intl
 WORKDIR /app
 COPY . .
-RUN composer install --no-interaction --no-dev --prefer-dist --optimize-autoloader
+
+# Auth needed for private repositories
+RUN --mount=type=secret,id=composer_auth \
+    COMPOSER_AUTH="$(cat /run/secrets/composer_auth)" \
+    composer install \
+      --no-interaction \
+      --no-dev \
+      --prefer-dist \
+      --optimize-autoloader
+
+# RUN composer install --no-interaction --no-dev --prefer-dist --optimize-autoloader
 RUN rm -rf /root/.composer/cache
 
 

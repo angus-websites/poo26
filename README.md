@@ -20,3 +20,11 @@ Run tests in parallel
 php artisan test --parallel
 
 ```
+
+## Building
+
+```bash
+docker build \
+  --secret id=composer_auth,src=auth.json \
+  -t poo26 .
+```
