@@ -1,4 +1,4 @@
-<x-layouts.public title="Shorten URL">
+<x-layouts.public>
     <x-page-container>
         <div class="max-w-xl mx-auto">
             <livewire:links.link-flow />
