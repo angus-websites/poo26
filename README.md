@@ -5,6 +5,7 @@
 - [ ] Temp link option
 - [ ] Admin panel
 - Document Models and improve README
+- Document flux credentials in github etc
 
 ## Useful commands
 
