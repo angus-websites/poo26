@@ -1,6 +1,5 @@
 <?php
 
-
 use App\Models\Destination;
 use App\Services\DestinationService;
 use App\Services\LinkService;
