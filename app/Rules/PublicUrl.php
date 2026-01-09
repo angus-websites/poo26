@@ -16,11 +16,11 @@ class PublicUrl implements ValidationRule
     /**
      * Run the validation rule.
      *
-     * @param Closure(string, ?string=): PotentiallyTranslatedString $fail
+     * @param  Closure(string, ?string=): PotentiallyTranslatedString  $fail
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if (!UrlService::validate($value)) {
+        if (! UrlService::validate($value)) {
             $fail('The :attribute is not a valid public URL.');
         }
     }

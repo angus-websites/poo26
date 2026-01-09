@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class DestinationFactory extends Factory
 {
-
     protected $model = Destination::class;
 
     /**
@@ -30,7 +29,7 @@ class DestinationFactory extends Factory
 
     public function forUrl(string $url): static
     {
-        return $this->state(fn() => [
+        return $this->state(fn () => [
             'url' => $url,
             'url_hash' => hash('sha256', $url),
         ]);

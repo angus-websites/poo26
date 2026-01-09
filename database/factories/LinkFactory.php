@@ -59,12 +59,12 @@ class LinkFactory extends Factory
 
     /**
      * Useful to create a link for a specific URL.
-     * @param string $url
+     *
      * @return $this
      */
     public function forUrl(string $url): static
     {
-        return $this->state(fn() => [
+        return $this->state(fn () => [
             'destination_id' => Destination::factory()->forUrl($url),
         ]);
     }

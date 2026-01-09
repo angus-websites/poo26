@@ -104,5 +104,4 @@ describe('UrlService::validate', function () {
         expect($isValid)->toBeFalse();
     });
 
-
 });

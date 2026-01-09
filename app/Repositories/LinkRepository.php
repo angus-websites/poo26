@@ -8,7 +8,6 @@ use Illuminate\Support\Collection;
 
 class LinkRepository implements LinkRepositoryInterface
 {
-
     public function create(array $data): Link
     {
         return Link::create($data);
@@ -32,6 +31,7 @@ class LinkRepository implements LinkRepositoryInterface
     public function update(Link $link, array $data): Link
     {
         $link->update($data);
+
         return $link;
     }
 

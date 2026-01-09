@@ -11,8 +11,8 @@ class UrlService
     {
         $url = trim($url);
 
-        if (!preg_match('#^https?://#i', $url)) {
-            $url = 'https://' . $url;
+        if (! preg_match('#^https?://#i', $url)) {
+            $url = 'https://'.$url;
         }
 
         return $url;
@@ -21,14 +21,14 @@ class UrlService
     public static function validate(string $url): bool
     {
         // Step 1: Basic URL syntax check
-        if (!filter_var($url, FILTER_VALIDATE_URL)) {
+        if (! filter_var($url, FILTER_VALIDATE_URL)) {
             return false;
         }
 
         // Step 2: Check host contains at least one dot
         $host = parse_url($url, PHP_URL_HOST);
 
-        if (!$host || !str_contains($host, '.')) {
+        if (! $host || ! str_contains($host, '.')) {
             return false;
         }
 

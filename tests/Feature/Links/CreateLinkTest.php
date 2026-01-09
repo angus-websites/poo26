@@ -46,7 +46,6 @@ it('following generated link redirects correctly', function () {
 
 });
 
-
 it('generating link without URL scheme redirects to https', function () {
 
     $page = visit('/');

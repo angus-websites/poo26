@@ -22,7 +22,6 @@ use Illuminate\Support\Carbon;
 class Snippet extends Model
 {
     use HasFactory;
-
     use HasUuids;
 
     protected $fillable = [

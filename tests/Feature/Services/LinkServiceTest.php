@@ -23,6 +23,7 @@ it('resolves an active link and increments clicks', function () {
 
     /**
      * Create an active link
+     *
      * @var Link $link
      */
     $link = Link::factory()
@@ -33,7 +34,6 @@ it('resolves an active link and increments clicks', function () {
             'clicks' => 0,
             'last_accessed' => null,
         ]);
-
 
     // Call resolve with the link
     $url = $this->service->resolve($link);
@@ -52,6 +52,7 @@ it('throws InvalidLinkException if link is expired', function () {
 
     /**
      * Create an expired link
+     *
      * @var Link $link
      */
     $link = Link::factory()
@@ -72,6 +73,7 @@ it('throws InvalidLinkException if link is inactive', function () {
 
     /**
      * Create an inactive link
+     *
      * @var Link $link
      */
     $link = Link::factory()
@@ -105,7 +107,6 @@ it('creates a link successfully', function () {
 
 });
 
-
 it('creates a new code for the same url', function () {
 
     $originalUrl = 'https://example.com';
@@ -116,7 +117,3 @@ it('creates a new code for the same url', function () {
     expect($link1->code)->not->toBe($link2->code);
 
 });
-
-
-
-

@@ -2,7 +2,6 @@
 
 namespace App\Contracts;
 
-use App\Models\Destination;
 use App\Models\Link;
 use Illuminate\Support\Collection;
 

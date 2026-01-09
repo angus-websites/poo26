@@ -21,7 +21,6 @@ use Illuminate\Support\Carbon;
 class Message extends Model
 {
     use HasFactory;
-
     use HasUuids;
 
     protected $fillable = [

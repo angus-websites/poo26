@@ -24,10 +24,8 @@ use Illuminate\Support\Carbon;
  * @property int $clicks
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property-read bool $is_expired
  * @property-read Destination $destination
- *
  */
 #[UseFactory(LinkFactory::class)]
 class Link extends Model
@@ -49,20 +47,15 @@ class Link extends Model
         'last_accessed' => 'datetime',
     ];
 
-
     protected static function booted(): void
     {
         static::creating(function ($link) {
 
             // Auto generate if no code provided
-            if (!$link->code) {
+            if (! $link->code) {
                 $link->code = app(CodeGeneratorService::class)->generate();
             }
 
-            // If last accessed not set, set to now
-            if (!$link->last_accessed) {
-                $link->last_accessed = now();
-            }
         });
     }
 

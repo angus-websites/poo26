@@ -7,11 +7,9 @@ use App\Models\Destination;
 
 class DestinationService
 {
-
     public function __construct(
         protected DestinationRepositoryInterface $destinationRepository,
-    )
-    {}
+    ) {}
 
     public function create(string $originalUrl): Destination
     {

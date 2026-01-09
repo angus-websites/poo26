@@ -18,7 +18,6 @@ use Illuminate\Support\Carbon;
  * @property string $url_hash
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property-read Collection<int, Link> $links
  */
 #[UseFactory(DestinationFactory::class)]
@@ -28,7 +27,7 @@ class Destination extends Model
 
     protected $fillable = [
         'url',
-        'url_hash'
+        'url_hash',
     ];
 
     protected static function booted(): void
@@ -36,7 +35,7 @@ class Destination extends Model
         static::creating(function ($link) {
 
             // Generate URL hash if not provided
-            if (!$link->url_hash) {
+            if (! $link->url_hash) {
                 $link->url_hash = hash('sha256', $link->url);
             }
         });
@@ -46,5 +45,4 @@ class Destination extends Model
     {
         return $this->hasMany(Link::class);
     }
-
 }

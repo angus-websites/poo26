@@ -8,7 +8,6 @@ use Illuminate\Support\Collection;
 
 class DestinationRepository implements DestinationRepositoryInterface
 {
-
     public function create(array $data): Destination
     {
         return Destination::create($data);
@@ -32,6 +31,7 @@ class DestinationRepository implements DestinationRepositoryInterface
     public function update(Destination $destination, array $data): Destination
     {
         $destination->update($data);
+
         return $destination;
     }
 

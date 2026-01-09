@@ -30,7 +30,7 @@ it('generates a unique code after collisions', function () {
         ->shouldReceive('findByCode')
         ->andReturnUsing(function ($code) use ($existingCodes) {
             return in_array($code, $existingCodes)
-                ? new Mock()
+                ? new Mock
                 : null;
         });
 
@@ -43,7 +43,7 @@ it('generates a unique code after collisions', function () {
 it('throws exception if unable to generate code', function () {
     $this->repo
         ->shouldReceive('findByCode')
-        ->andReturn(new Mock()); // always collides
+        ->andReturn(new Mock); // always collides
 
     $this->service
         ->generate(2, 2, 2); // tiny max length + attempts

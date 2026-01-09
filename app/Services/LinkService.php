@@ -3,8 +3,8 @@
 namespace App\Services;
 
 use App\Contracts\LinkRepositoryInterface;
-use App\Exceptions\InvalidLinkException;
 use App\Exceptions\CodeGeneratorException;
+use App\Exceptions\InvalidLinkException;
 use App\Models\Link;
 use App\Services\Util\CodeGeneratorService;
 use Illuminate\Support\Carbon;
@@ -53,7 +53,7 @@ class LinkService
     public function resolve(Link $link): string
     {
 
-        if (!$link->isActiveAndNotExpired()) {
+        if (! $link->isActiveAndNotExpired()) {
             throw new InvalidLinkException(
                 'The link is either inactive or has expired.'
             );
@@ -69,7 +69,7 @@ class LinkService
     /**
      * Track access analytics for a link.
      *
-     * @param  Link $link  The link to track.
+     * @param  Link  $link  The link to track.
      */
     protected function trackAccess(Link $link): void
     {

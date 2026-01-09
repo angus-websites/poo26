@@ -26,6 +26,7 @@ class SnippetRepository implements SnippetRepositoryInterface
     public function update(Snippet $snippet, array $data): Snippet
     {
         $snippet->update($data);
+
         return $snippet;
     }
 
