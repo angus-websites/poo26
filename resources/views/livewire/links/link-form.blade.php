@@ -33,7 +33,7 @@ new class extends Component {
 
         // Emit the shortened URL event
         $this->dispatch('link:shortened', [
-            'short_url' => $link->slug,
+            'url_code' => $link->code,
         ]);
 
         // Reset the form

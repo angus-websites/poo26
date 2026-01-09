@@ -11,9 +11,9 @@ new class extends Component {
     public string $stage = 'form';
 
     /**
-     * The generated short URL
+     * The generated url code
      */
-    public ?string $shortUrl = null;
+    public ?string $urlCode = null;
 
     protected $listeners = [
         'message:shortened' => 'onMessageShortened',
@@ -22,13 +22,13 @@ new class extends Component {
 
     public function onMessageShortened(array $payload): void
     {
-        $this->shortUrl = $payload['short_url'] ?? null;
+        $this->urlCode = $payload['url_code'] ?? null;
         $this->stage = 'result';
     }
 
     public function resetFlow(): void
     {
-        $this->reset(['shortUrl']);
+        $this->reset(['urlCode']);
         $this->stage = 'form';
     }
 };
@@ -40,7 +40,7 @@ new class extends Component {
         <livewire:messages.message-form/>
     @elseif($stage === 'result')
         <livewire:links.link-results
-            :shortUrl="$shortUrl"
+            :urlCode="$urlCode"
             heading="Your message is ready!"
             backButtonText="Create another message"
         />

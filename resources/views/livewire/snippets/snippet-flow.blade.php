@@ -11,9 +11,9 @@ new class extends Component {
     public string $stage = 'form';
 
     /**
-     * The generated short URL
+     * The generated URL code
      */
-    public ?string $shortUrl = null;
+    public ?string $urlCode = null;
 
     protected $listeners = [
         'snippet:shortened' => 'onSnippetShortened',
@@ -22,13 +22,13 @@ new class extends Component {
 
     public function onSnippetShortened(array $payload): void
     {
-        $this->shortUrl = $payload['short_url'] ?? null;
+        $this->urlCode = $payload['url_code'] ?? null;
         $this->stage = 'result';
     }
 
     public function resetFlow(): void
     {
-        $this->reset(['shortUrl']);
+        $this->reset(['urlCode']);
         $this->stage = 'form';
     }
 };
@@ -40,7 +40,7 @@ new class extends Component {
         <livewire:snippets.snippet-form/>
     @elseif($stage === 'result')
         <livewire:links.link-results
-            :shortUrl="$shortUrl"
+            :urlCode="$urlCode"
             heading="Your snippet is ready!"
             backButtonText="Create another snippet"
         />

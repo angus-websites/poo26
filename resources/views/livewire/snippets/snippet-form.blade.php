@@ -58,7 +58,7 @@ new class extends Component {
 
         try {
             $message = $snippetService->create($this->snippet, $this->language);
-            $shortUrl = $snippetService->createCodeForSnippet($message);
+            $urlCode = $snippetService->createCodeForSnippet($message);
         } catch (Exception) {
             session()->flash('error', 'Failed to create snippet. Please try again.');
             return;
@@ -66,7 +66,7 @@ new class extends Component {
 
         // Emit the shortened Message event
         $this->dispatch('snippet:shortened', [
-            'short_url' => $shortUrl,
+            'url_code' => $urlCode,
         ]);
 
         // Reset the form

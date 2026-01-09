@@ -17,7 +17,7 @@ new class extends Component {
 
         try {
             $message = $messageService->create($this->message);
-            $shortUrl = $messageService->createCodeForMessage($message);
+            $urlCode = $messageService->createCodeForMessage($message);
         } catch (Exception) {
             session()->flash('error', 'Failed to create message. Please try again.');
             return;
@@ -25,7 +25,7 @@ new class extends Component {
 
         // Emit the shortened Message event
         $this->dispatch('message:shortened', [
-            'short_url' => $shortUrl,
+            'url_code' => $urlCode,
         ]);
 
         // Reset the form
