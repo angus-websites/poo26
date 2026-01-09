@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\LinkResolverController;
+use App\Http\Controllers\LinkController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\SnippetController;
 use App\Http\Controllers\SystemController;
@@ -31,5 +31,5 @@ Route::get('/version', [SystemController::class, 'version']);
 Route::get('/info', [SystemController::class, 'info']);
 
 // Link Resolver
-Route::get('{link:code}', [LinkResolverController::class, 'resolve'])
+Route::get('{link:code}', [LinkController::class, 'resolve'])
     ->name('links.resolve');

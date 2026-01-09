@@ -4,9 +4,7 @@
 
 - [ ] Temp link option
 - [ ] Sitemap
-- [ ] Github actions
 - [ ] SEO
-- [ ] Favicon
 - [ ] Admin panel
 
 ## Useful commands

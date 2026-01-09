@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 
+/**
+ * The SystemController handles system-related endpoints such as version and info.
+ */
 class SystemController extends Controller
 {
     public function version(): JsonResponse
@@ -17,6 +20,11 @@ class SystemController extends Controller
         ]);
     }
 
+    /**
+     * Show system information
+     * @param Request $request
+     * @return JsonResponse|View
+     */
     public function info(Request $request): JsonResponse|View
     {
         $data = [
@@ -49,4 +57,5 @@ class SystemController extends Controller
             return $composer['version'] ?? 'unknown';
         });
     }
+
 }

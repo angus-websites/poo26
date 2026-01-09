@@ -6,6 +6,9 @@ use App\Models\Message;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 
+/**
+ * Controller for handling messages
+ */
 class MessageController extends Controller
 {
     /**
