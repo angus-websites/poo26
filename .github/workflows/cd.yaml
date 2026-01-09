@@ -56,14 +56,8 @@ jobs:
       # 🔐 Build Composer auth JSON from secrets
       - name: Build Composer auth
         run: |
-          echo 'COMPOSER_AUTH={
-            "http-basic": {
-              "composer.fluxui.dev": {
-                "username": "'"${{ secrets.FLUX_USERNAME }}"'",
-                "password": "'"${{ secrets.FLUX_LICENSE_KEY }}"'"
-              }
-            }
-          }' >> $GITHUB_ENV
+          echo "COMPOSER_AUTH={\"http-basic\":{\"composer.fluxui.dev\":{\"username\":\"${{ secrets.FLUX_USERNAME }}\",\"password\":\"${{ secrets.FLUX_LICENSE_KEY }}\"}}}" >> $GITHUB_ENV
+      
 
       # Build & push image
       - name: Build and push Docker image
