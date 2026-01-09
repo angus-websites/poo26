@@ -7,6 +7,9 @@ use App\Services\SnippetService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 
+/**
+ * Controller for handling code snippets
+ */
 class SnippetController extends Controller
 {
     public function __construct(

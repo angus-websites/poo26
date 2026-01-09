@@ -6,7 +6,10 @@ use App\Models\Link;
 use App\Services\LinkService;
 use Illuminate\Http\RedirectResponse;
 
-class LinkResolverController extends Controller
+/**
+ * Controller for handling links
+ */
+class LinkController extends Controller
 {
     public function __construct(
         protected LinkService $linkService

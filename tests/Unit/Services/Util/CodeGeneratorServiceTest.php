@@ -8,7 +8,7 @@ use Mockery\Mock;
 
 beforeEach(function () {
     $this->repo = Mockery::mock(CodeRepositoryInterface::class);
-    $this->service = new CodeGeneratorService($this->repo);
+    $this->service = new CodeGeneratorService($this->repo, 2, 2, 2);
 });
 
 it('generates a code of correct length', function () {
@@ -16,7 +16,7 @@ it('generates a code of correct length', function () {
         ->shouldReceive('findByCode')
         ->andReturnNull(); // always "unique"
 
-    $code = $this->service->generate(10);
+    $code = new CodeGeneratorService($this->repo, 10, 10, 1)->generate();
 
     expect(Str::length($code))->toBe(10)
         ->and($code)->toMatch('/^[a-zA-Z0-9]+$/');
@@ -46,6 +46,6 @@ it('throws exception if unable to generate code', function () {
         ->andReturn(new Mock); // always collides
 
     $this->service
-        ->generate(2, 2, 2); // tiny max length + attempts
+        ->generate(); // tiny max length + attempts
 
 })->throws(CodeGeneratorException::class);

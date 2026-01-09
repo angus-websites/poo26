@@ -1,4 +1,4 @@
-<x-layouts.minimal title="Poo">
+<x-layouts.minimal>
     <x-page-container>
         <div class="max-w-3xl mx-auto">
             <flux:card class="space-y-6">
