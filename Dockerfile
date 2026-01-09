@@ -5,6 +5,10 @@ RUN apk add --no-cache icu-dev \
 WORKDIR /app
 COPY . .
 
+# Debug
+RUN --mount=type=secret,id=composer_auth \
+    echo "Length of secret: $(wc -c < /run/secrets/composer_auth)" \
+
 # Auth using auth.json
 RUN --mount=type=secret,id=composer_auth \
     export COMPOSER_AUTH="$(cat /run/secrets/composer_auth | tr -d '\n')" && \
