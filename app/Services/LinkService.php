@@ -17,7 +17,15 @@ class LinkService
         protected LinkRepositoryInterface $linkRepository,
         protected DestinationService $destinationService,
     ) {
-        $this->codeGeneratorService = new CodeGeneratorService($linkRepository);
+
+        // Set up a code generator to create unique link codes
+        $codeConfig = config('links.code');
+        $this->codeGeneratorService = new CodeGeneratorService(
+            repo: $this->linkRepository,
+            initialLength: $codeConfig['initial_length'],
+            maxLength: $codeConfig['max_length'],
+            attemptsPerLength: $codeConfig['attempts_per_length'],
+        );
     }
 
     /**
