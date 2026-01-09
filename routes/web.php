@@ -31,5 +31,5 @@ Route::get('/version', [SystemController::class, 'version']);
 Route::get('/info', [SystemController::class, 'info']);
 
 // Link Resolver
-Route::get('{link:slug}', [LinkResolverController::class, 'resolve'])
+Route::get('{link:code}', [LinkResolverController::class, 'resolve'])
     ->name('links.resolve');

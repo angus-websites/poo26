@@ -1,22 +1,28 @@
 <?php
 
 use App\Exceptions\CodeGeneratorException;
+use App\Rules\PublicUrl;
 use App\Services\LinkService;
 use Livewire\Volt\Component;
-use App\Services\Util\UrlNormalizerService;
+use App\Services\Util\UrlService;
 
 new class extends Component {
 
     public string $url = '';
 
-    protected array $rules = [
-        'url' => ['required', 'url', 'max:2048'],
-    ];
+
+    protected function rules(): array
+    {
+        return [
+            'url' => ['required', 'max:2048', new PublicUrl],
+        ];
+    }
+
 
     public function submit(LinkService $linkService): void
     {
         // Normalize the URL
-        $this->url = UrlNormalizerService::normalize($this->url);
+        $this->url = UrlService::normalize($this->url);
 
         // Validate the input
         $this->validate();

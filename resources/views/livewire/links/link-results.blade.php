@@ -44,7 +44,7 @@ new class extends Component {
     </flux:heading>
 
     <div class="space-y-2">
-        <label id="shortened-url-text"
+        <label id="short_url"
                class="text-center border-gray-200 dark:border-gray-200/10 border font-mono [&::selection]:bg-green-200 [&::selection]:text-green-900 text-zinc-500 dark:text-zinc-300 col-span-6 bg-white/10  text-sm rounded-lg block w-full px-2.5 py-4 truncate overflow-hidden">
             {{ $urlCode }}
         </label>
