@@ -30,7 +30,7 @@ class MessageService
 
     /**
      * Generate HTML content from Markdown for a message
-     * @param Message $message
+     *
      * @return string The HTML content
      */
     public function generateHtmlContent(Message $message): string

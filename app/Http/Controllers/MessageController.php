@@ -12,12 +12,9 @@ use Illuminate\Contracts\View\View;
  */
 class MessageController extends Controller
 {
-
     public function __construct(
         protected MessageService $messageService,
-    )
-    {
-    }
+    ) {}
 
     /**
      * Resolve a link and redirect to its target URL

@@ -22,8 +22,6 @@ class SystemController extends Controller
 
     /**
      * Show system information
-     * @param Request $request
-     * @return JsonResponse|View
      */
     public function info(Request $request): JsonResponse|View
     {
@@ -57,5 +55,4 @@ class SystemController extends Controller
             return $composer['version'] ?? 'unknown';
         });
     }
-
 }

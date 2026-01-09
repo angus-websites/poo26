@@ -21,4 +21,3 @@ it('ensures ui for all routes is unchanged (Mobile, Dark)', function (string $ro
     $page = visit($route)->on()->mobile()->inDarkMode();
     $page->assertScreenshotMatches();
 })->with('publicRoutes');
-
