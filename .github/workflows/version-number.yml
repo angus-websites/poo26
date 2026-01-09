@@ -24,6 +24,9 @@ jobs:
       - name: Check version in composer.json
         run: |
           uv run python .github/scripts/check_version.py
-
+          
+      # Call tests workflow
       - name: Trigger tests workflow
         uses: ./.github/workflows/tests.yml
+        with:
+          run_id: ${{ github.run_id }}

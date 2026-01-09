@@ -4,7 +4,11 @@ concurrency:
   cancel-in-progress: true
 
 on:
-  workflow_call: {}
+  workflow_call:
+    inputs:
+      run_id:
+        required: false
+        type: string
 
 jobs:
   ci:
