@@ -3,8 +3,6 @@
 ## TODO
 
 - [ ] Temp link option
-- [ ] Sitemap
-- [ ] SEO
 - [ ] Admin panel
 
 ## Useful commands
