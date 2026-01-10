@@ -20,7 +20,7 @@
                         <p class="text-base font-semibold text-green-600 dark:text-green-400">
                             @yield('code')
                         </p>
-                        <h1 class="mt-4 text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl dark:text-white">
+                        <h1 class="mt-4 text-5xl font-semibold tracking-tight text-balance text-green-950/90 sm:text-7xl dark:text-green-50">
                             @yield('message')
                         </h1>
                         <div class="mt-6">
