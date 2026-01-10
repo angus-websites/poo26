@@ -32,8 +32,9 @@ Poo26 is the 2026 version of Poo.ink the URL shortener. Poo26 is built with...
 - [Testing](#testing)
     - [Running all tests](#running-all-tests)
     - [Running tests and updating snapshots](#running-tests-and-updating-snapshots)
-- [Other useful commands](#other-useful-commands)
-- [TODO](#todo)
+- [Useful notes and commands](#useful-notes-and-commands)
+    - [Building the Docker image manually](#building-the-docker-image-manually)
+    - [Trusted proxies](#trusted-proxies)
 
 ## Requirements
 
@@ -41,8 +42,6 @@ Poo26 is the 2026 version of Poo.ink the URL shortener. Poo26 is built with...
 - Composer
 - NodeJS 20+
 - Docker (optional, for building images)
-
-[Get Started locally](#getting-started-locally)
 
 
 ## Paid Dependencies
@@ -86,17 +85,8 @@ the `docker-compose.yml` file to use a persistent database.
 
 
 ## Getting started locally (without Docker)
-1. Clone the repository
 
-   ```bash
-   git clone git@github.com:angus-websites/poo26.git
-   ```
-2. Navigate to the project directory
-
-   ```bash
-    cd poo26
-    ```
-3. Install PHP dependencies using Composer
+1. Install PHP dependencies using Composer
 
    > **_Licence:_**  Some dependencies require a valid license and auth.json file to install correctly see [Paid Dependencies](#paid-dependencies)
 
@@ -104,31 +94,31 @@ the `docker-compose.yml` file to use a persistent database.
     composer install
     ```
 
-4.  Install JavaScript dependencies using npm, or Bun
+2. Install JavaScript dependencies using npm, or Bun
     ```bash
     npm install
     # or
     bun install
     ```
-5. Copy the example environment file and configure your [environment variables](#environment-variables)
+3. Copy the example environment file and configure your [environment variables](#environment-variables)
     ```bash
     cp .env.example .env
     ```
-6. Generate an application key (APP_KEY) (if not already done)
+4. Generate an application key (APP_KEY) (if not already done)
     ```bash
     php artisan key:generate
     ```
-7. Run database migrations
+5. Run database migrations
     ```bash
     php artisan migrate
     ```
-8. Start Vite development server
+6. Start Vite development server
     ```bash
     npm run dev
     # or
     bun run dev
     ```
-9. Start the Laravel development server
+7. Start the Laravel development server
     ```bash
     php artisan serve
     ```
@@ -203,7 +193,9 @@ php artisan test --parallel
 php artisan test --update-snapshots
 ```
 
-## Other useful commands
+## Useful notes and commands
+
+### Building the Docker image manually
 
 Build the docker image with secret auth.json manually ...
 
@@ -214,10 +206,6 @@ docker build \
   -t poo26 .
 ```
 
-## TODO
+### Trusted proxies
 
-- Temp link option
-- Document Models and improve README
-- Document flux credentials in github etc
-- Document trusted proxies
-
+Poo26 is currently configured to trust all proxies by default. If you need to restrict this, you can modify the `bootstrap/app.php` `trustProxies` method.
