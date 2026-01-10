@@ -6,7 +6,8 @@
 - [ ] Admin panel
 - Document Models and improve README
 - Document flux credentials in github etc
-
+- CUstom error pages
+- 
 ## Useful commands
 
 Command to update UI snapshots:
@@ -39,3 +40,4 @@ DOCKER_BUILDKIT=1 docker build --secret id=composer_auth,env=COMPOSER_AUTH .
 
 - Secret auth.json in github actions needs to be single line json
 - Trusted proxies
+- Admin_email env variable for admin panel access
