@@ -1,4 +1,4 @@
-<x-layouts.public title="Snippets">
+<x-layouts.public title="Share Code Snippets with Short URLs | Poo">
     @push('head')
         <link rel="stylesheet" type='text/css'
               href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"/>
