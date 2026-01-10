@@ -3,7 +3,7 @@
     <div class="min-h-screen flex flex-col">
         <x-layouts.core.header/>
         <x-layouts.core.navigation/>
-        <div class="flex-1">
+        <div class="flex-1 flex">
             {{ $slot }}
         </div>
         <x-layouts.core.footer/>

@@ -5,10 +5,6 @@ RUN apk add --no-cache icu-dev \
 WORKDIR /app
 COPY . .
 
-# Debug
-RUN --mount=type=secret,id=composer_auth \
-    echo "Length of secret: $(wc -c < /run/secrets/composer_auth)"
-
 # Auth using auth.json
 RUN --mount=type=secret,id=composer_auth \
     export COMPOSER_AUTH="$(cat /run/secrets/composer_auth | tr -d '\n')" && \
@@ -35,7 +31,7 @@ RUN npm run build && npm cache clean --force
 FROM dunglas/frankenphp:1-php8.4-alpine AS prod
 
 # Install system dependencies
-RUN apk update && apk add --no-cache \
+RUN apk add --no-cache \
     curl \
     zip \
     unzip \

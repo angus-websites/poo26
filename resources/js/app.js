@@ -1,17 +1,6 @@
 import './bootstrap';
 
 // Alpine Magic Clipboard
-document.addEventListener('alpine:init', () => {
-
-    Alpine.magic('clipboard', () => {
-        Flux.toast({
-            text: 'Copied to clipboard!',
-            duration: 2000
-        })
-        return subject => navigator.clipboard?.writeText(subject.trim())
-    })
-})
-
 
 document.addEventListener('alpine:init', () => {
     Alpine.magic('clipboard', () => {

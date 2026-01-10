@@ -2,5 +2,6 @@ User-agent: *
 Disallow: /livewire/
 Disallow: /flux/
 Disallow: /storage/
+Disallow: /admin/
 
 Sitemap: https://poo.ink/sitemap.xml
