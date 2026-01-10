@@ -23,6 +23,7 @@ class LinkController extends Controller
     {
         $targetUrl = $this->linkService->resolve($link);
 
+
         return view('public.links.forward', compact('targetUrl'));
     }
 }
