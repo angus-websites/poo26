@@ -1,4 +1,5 @@
-<x-layouts.minimal title="Poo | Send Messages via Short URLs">
+<x-layouts.minimal title="Poo | Simple & Fast URL Shortener for Links, Messages & Code">
+    @yield('og-image', url('assets/images/core/ogimagelink.jpg'))
     <x-page-container>
         <div class="max-w-3xl mx-auto">
             <flux:card class="space-y-6 text-center" x-data x-init="window.location.href = '{{$targetUrl}}'">
