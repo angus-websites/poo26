@@ -14,13 +14,33 @@ Poo26 is the 2026 version of Poo.ink the URL shortener. Poo26 is built with...
 - PestPHP 4 for testing
 - FluxUi components
 
+## Contents
+
+- [Requirements](#requirements)
+- [Paid Dependencies](#paid-dependencies)
+- [Environment Variables](#environment-variables)
+- [Get started with Docker (locally)](#get-started-with-docker-locally)
+    - [Build and run with Docker Compose](#build-and-run-with-docker-compose)
+    - [Database](#database)
+- [Getting started locally (without Docker)](#getting-started-locally-without-docker)
+- [Admin Panel](#admin-panel)
+    - [Creating an Admin User](#creating-an-admin-user)
+    - [Admins in Production](#admins-in-production)
+- [GitHub Actions](#github-actions)
+    - [CI Workflow (`ci.yaml`)](#ciyaml)
+    - [CD Workflow (`cd.yaml`)](#cdyaml)
+- [Testing](#testing)
+    - [Running all tests](#running-all-tests)
+    - [Running tests and updating snapshots](#running-tests-and-updating-snapshots)
+- [Other useful commands](#other-useful-commands)
+- [TODO](#todo)
+
 ## Requirements
 
 - PHP 8.3+
 - Composer
 - NodeJS 20+
 - Docker (optional, for building images)
-- Make
 
 [Get Started locally](#getting-started-locally)
 
@@ -44,7 +64,28 @@ Laravel uses environment variables to configure various aspects of the applicati
 
 To disable stack traces in browser set `APP_DEBUG=false` in your `.env` file.
 
-## Getting started locally
+## Get started with Docker (locally)
+
+> **_Licence:_**  Ensure you have an `auth.json` file with a valid license to install paid dependencies
+see [Paid Dependencies](#paid-dependencies)
+
+### Build and run with Docker Compose
+
+The following command will build and start the application using Docker Compose:
+
+```bash
+DOCKER_BUILDKIT=1 docker compose up --build
+```
+
+Visit [http://127.0.0.1:8000](http://127.0.0.1:8000 ) in your web browser to access the application.
+
+### Database
+
+This will use a sqlite in memory database, so any data will be lost when the container is stopped. To avoid this modify
+the `docker-compose.yml` file to use a persistent database.
+
+
+## Getting started locally (without Docker)
 1. Clone the repository
 
    ```bash
@@ -91,9 +132,26 @@ To disable stack traces in browser set `APP_DEBUG=false` in your `.env` file.
     ```bash
     php artisan serve
     ```
-   
 
-## Github Actions
+## Admin Panel
+
+The admin panel is built using FilamentPHP. To access the admin panel, navigate to
+Visit [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin ) in your web browser.
+
+### Creating an Admin User
+You can create an admin user using the following Artisan command:
+
+```bash
+php artisan make:filament-user
+```
+
+This will prompt you to enter a name, email, and password for the new admin user.
+
+### Admins in Production
+
+In production, you can set the `ADMIN_EMAIL` environment variable in your `.env` file to specify the email address of the admin user. This will restrict access to the admin panel to only that email address. 
+
+## GitHub Actions
 
 The project includes two Github Actions workflows for CI/CD.
 
@@ -127,31 +185,27 @@ This workflow expects the following secrets to be set in the `Production` enviro
 3. `CAP_APP_NAME` - The name of the app on your CapRover server e.g `poo26`
 4. `CAP_APP_TOKEN` - The token for your CapRover app
 
+## Testing
 
+Poo26 uses PestPHP for testing. Tests are split into Feature and Unit tests located in the `tests/Feature` and `tests/Unit` directories respectively.
 
+Poo26 also makes use of Pest's snapshot testing capabilities for UI components. Snapshots are stored in the `tests/.pest` directory.
 
-## TODO
+### Running all tests
 
-- [ ] Temp link option
-- Document Models and improve README
-- Document flux credentials in github etc
-- 
-## Useful commands
+```bash
+php artisan test --parallel
+```
 
-Command to update UI snapshots:
+### Running tests and updating snapshots
 
 ```bash
 php artisan test --update-snapshots
 ```
 
-Run tests in parallel
+## Other useful commands
 
-```bash
-php artisan test --parallel
-
-```
-
-## Building
+Build the docker image with secret auth.json manually ...
 
 ```bash
 DOCKER_BUILDKIT=1
@@ -160,12 +214,10 @@ docker build \
   -t poo26 .
 ```
 
-```bash
-DOCKER_BUILDKIT=1 docker build --secret id=composer_auth,env=COMPOSER_AUTH . 
-```
+## TODO
 
-## Notes
+- Temp link option
+- Document Models and improve README
+- Document flux credentials in github etc
+- Document trusted proxies
 
-- Secret auth.json in github actions needs to be single line json
-- Trusted proxies
-- Admin_email env variable for admin panel access
