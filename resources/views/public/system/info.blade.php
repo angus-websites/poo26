@@ -1,4 +1,4 @@
-<x-layouts.minimal title="System info | Poo">
+<x-layouts.minimal title="Poo | System info">
     <x-page-container>
         <flux:card class="space-y-6" >
             <div class="px-4 sm:px-0">

@@ -1,4 +1,4 @@
-<x-layouts.minimal title="Send Messages via Short URLs | Poo">
+<x-layouts.minimal title="Poo | Send Messages via Short URLs">
     <x-page-container>
         <div class="max-w-3xl mx-auto">
             <flux:card class="space-y-6">

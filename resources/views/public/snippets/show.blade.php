@@ -1,4 +1,4 @@
-<x-layouts.minimal title="Share Code Snippets with Short URLs | Poo">
+<x-layouts.minimal title="Poo | Share Code Snippets with Short URLs">
     <x-page-container>
         <div class="max-w-3xl mx-auto" x-data="{ content: @js($rawContent) }">
             <flux:card class="dark:bg-[#282A36] overflow-hidden">
