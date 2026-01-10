@@ -8,7 +8,7 @@ new class extends Component {
     public string $message = '';
 
     protected array $rules = [
-        'message' => ['required', 'string', 'max:3000'],
+        'message' => ['required', 'string', 'max:5000'],
     ];
 
     public function submit(MessageService $messageService): void

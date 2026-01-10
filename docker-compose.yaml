@@ -1,0 +1,18 @@
+services:
+  app:
+    image: poo26
+    container_name: poo26-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+      secrets:
+        - composer_auth
+    env_file:
+      - .env.example
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+secrets:
+  composer_auth:
+    file: ./auth.json
