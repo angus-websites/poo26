@@ -1,4 +1,5 @@
-<x-layouts.core.master :title="$title ?? null">
+<x-layouts.core.master>
+    @section('title', $title ?? null)
     <div class="min-h-screen flex flex-col">
         <x-layouts.core.header/>
         <x-layouts.core.navigation/>

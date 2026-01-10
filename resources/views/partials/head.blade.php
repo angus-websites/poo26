@@ -3,7 +3,7 @@
 
 {{--Meta--}}
 <!--Angus was here 2026-->
-<title>{{ $title ?? config('app.name') }}</title>
+<title>@yield('title', config('app.name'))</title>
 <meta name="description"
       content="@yield('description', 'Poo is a lightweight URL shortener that lets you share links, messages, and code snippets instantly. Clean, fast, and free')"/>
 <meta property="og:image" content="{{ url('assets/images/core/ogimage.png') }}">
