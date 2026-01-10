@@ -53,6 +53,10 @@ jobs:
           labels: |
             org.opencontainers.image.source=${{ github.repository }}
 
+      # Set up Docker Buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       # Build & push image
       - name: Build and push
         uses: docker/build-push-action@v6
