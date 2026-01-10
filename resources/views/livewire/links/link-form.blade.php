@@ -69,6 +69,19 @@ new class extends Component {
             <flux:error name="url"/>
         </flux:field>
 
+        <flux:field variant="inline">
+            <flux:checkbox wire:model="hide"/>
+
+            <flux:label badge="Beta">
+                Hide link preview
+            </flux:label>
+
+            <flux:error name="hide"/>
+            <flux:description>
+                When enabled, the link preview will be hidden when the link is shared on social media platforms.
+            </flux:description>
+        </flux:field>
+
         <div class="space-y-2">
             <flux:button type="submit" variant="primary" class="w-full">Shorten</flux:button>
         </div>
