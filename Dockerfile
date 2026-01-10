@@ -56,6 +56,8 @@ RUN install-php-extensions \
 # Copy vendor files from composer stage
 COPY --from=composer_prod /app/vendor /var/www/html/vendor
 
+# Copy frontend build files
+COPY --from=frontend /app/public /var/www/html/public
 
 # Copy project files
 COPY . /var/www/html

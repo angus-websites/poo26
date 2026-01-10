@@ -35,3 +35,6 @@ docker build \
 DOCKER_BUILDKIT=1 docker build --secret id=composer_auth,env=COMPOSER_AUTH . 
 ```
 
+## Notes
+
+- Secret auth.json in github actions needs to be single line json
