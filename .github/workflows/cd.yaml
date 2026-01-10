@@ -63,6 +63,9 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           secrets: |
             composer_auth=${{ secrets.COMPOSER_AUTH }}
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:cache
+          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:cache,mode=max
+
 
       # Deploy to CapRover
       - name: Deploy to CapRover
