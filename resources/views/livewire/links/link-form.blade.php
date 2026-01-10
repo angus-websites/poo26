@@ -69,6 +69,7 @@ new class extends Component {
             <flux:error name="url"/>
         </flux:field>
 
+
         <div class="space-y-2">
             <flux:button type="submit" variant="primary" class="w-full">Shorten</flux:button>
         </div>
