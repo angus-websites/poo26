@@ -3,10 +3,8 @@
 ## TODO
 
 - [ ] Temp link option
-- [ ] Admin panel
 - Document Models and improve README
 - Document flux credentials in github etc
-- CUstom error pages
 - 
 ## Useful commands
 
