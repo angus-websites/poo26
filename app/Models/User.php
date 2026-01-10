@@ -17,9 +17,7 @@ use Illuminate\Notifications\Notifiable;
  * @property int $id
  * @property string $name
  * @property string $email
- *
  */
-
 #[UseFactory(UserFactory::class)]
 class User extends Authenticatable implements FilamentUser
 {
