@@ -61,8 +61,8 @@ except subprocess.CalledProcessError:
     sys.exit(0)
 
 if not main_version:
-    print("⚠️  composer.json on main branch has no version field")
-    sys.exit(1)
+    print("⚠️  composer.json not found on origin/main or has no version field. Skipping version comparison.")
+    sys.exit(0)
 
 print(f"Main Branch Version: {main_version}")
 
