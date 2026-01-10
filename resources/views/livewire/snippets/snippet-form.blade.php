@@ -18,7 +18,7 @@ new class extends Component {
         );
 
         return [
-            'snippet' => ['required', 'string', 'max:5000'],
+            'snippet' => ['required', 'string', 'max:10000'],
             'language' => ['nullable', Rule::in($languages)],
         ];
     }
