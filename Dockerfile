@@ -5,9 +5,13 @@ RUN apk add --no-cache icu-dev \
 WORKDIR /app
 COPY . .
 
-# Auth needed for private repositories
+# Debug
 RUN --mount=type=secret,id=composer_auth \
-    COMPOSER_AUTH="$(cat /run/secrets/composer_auth)" \
+    echo "Length of secret: $(wc -c < /run/secrets/composer_auth)"
+
+# Auth using auth.json
+RUN --mount=type=secret,id=composer_auth \
+    export COMPOSER_AUTH="$(cat /run/secrets/composer_auth | tr -d '\n')" && \
     composer install \
       --no-interaction \
       --no-dev \
@@ -52,6 +56,8 @@ RUN install-php-extensions \
 # Copy vendor files from composer stage
 COPY --from=composer_prod /app/vendor /var/www/html/vendor
 
+# Copy frontend build files
+COPY --from=frontend /app/public /var/www/html/public
 
 # Copy project files
 COPY . /var/www/html
