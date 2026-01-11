@@ -1,13 +1,20 @@
-<x-layouts.minimal title="Poo | Your Poo Link is Here!">
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
+<head>
+    @section('title', 'Poo | Your Poo Link is Here!')
     @section('og-image', url('assets/images/core/ogimagelink.jpg'))
     @section('description', 'You have been sent a Poo link! Click to proceed to the destination.')
-
-    <x-page-container>
-        <div class="max-w-3xl mx-auto">
-            <flux:card class="space-y-6 text-center" x-data x-init="window.location.href = '{{$targetUrl}}'">
-                <p>If you are not redirected automatically, please below...</p>
-                <flux:button :href="$targetUrl" variant="primary">Go!</flux:button>
-            </flux:card>
-        </div>
-    </x-page-container>
-</x-layouts.minimal>
+    @include('partials.meta')
+</head>
+<body>
+<p>If you are not redirected automatically, please click below...</p>
+<br>
+<a href="{{ $targetUrl }}">Go!</a>
+<script>
+    // Wait for the page to load and redirect to the original URL (This allows links to have custom metadata)
+    document.addEventListener('DOMContentLoaded', function () {
+        window.location.href = "{{ $targetUrl }}";
+    });
+</script>
+</body>
+</html>
