@@ -60,5 +60,4 @@ it('generating link without URL scheme redirects to https', function () {
     $this->get($shortenedUrl)
         ->assertOk();
 
-
 });
