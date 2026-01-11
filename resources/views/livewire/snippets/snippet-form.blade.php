@@ -125,7 +125,7 @@ new class extends Component {
             />
             <flux:error name="snippet"/>
             <flux:description>
-                Content is limited to 5000 characters.
+                Content is limited to 10000 characters.
             </flux:description>
         </flux:field>
 
