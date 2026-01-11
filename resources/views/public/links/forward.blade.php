@@ -11,7 +11,7 @@
 <br>
 <a href="{{ $targetUrl }}">Go!</a>
 <script>
-    // Wait for the page to load and redirect to the original URL
+    // Wait for the page to load and redirect to the original URL (This allows links to have custom metadata)
     document.addEventListener('DOMContentLoaded', function () {
         window.location.href = "{{ $targetUrl }}";
     });
