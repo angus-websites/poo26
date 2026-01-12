@@ -30,9 +30,10 @@ RUN npm run build && npm cache clean --force
 # ============== Stage 3: Setup PHP and Laravel for production ===============
 FROM dunglas/frankenphp:1-php8.4-alpine AS prod
 
-# Install system dependencies
+# Install system dependencies (including nodejs for Shiki rendering)
 RUN apk add --no-cache \
     curl \
+    nodejs \
     zip \
     unzip \
     git \
