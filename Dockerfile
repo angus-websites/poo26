@@ -34,6 +34,7 @@ FROM dunglas/frankenphp:1-php8.4-alpine AS prod
 RUN apk add --no-cache \
     curl \
     nodejs \
+    npm \
     zip \
     unzip \
     git \
@@ -41,7 +42,7 @@ RUN apk add --no-cache \
     icu-dev \
     libzip-dev \
     dcron \
-    supervisor
+    supervisor && ln -s /usr/bin/node /usr/local/bin/node
 
 RUN install-php-extensions \
     pcntl \
@@ -61,6 +62,9 @@ COPY . /var/www/html
 
 # Set workdir
 WORKDIR /var/www/html
+
+# Manually install shiki
+RUN npm install shiki
 
 # Copy our prod script and set permissions
 COPY server/start.sh /start.sh
