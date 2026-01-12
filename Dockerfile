@@ -42,7 +42,7 @@ RUN apk add --no-cache \
     icu-dev \
     libzip-dev \
     dcron \
-    supervisor
+    supervisor && ln -s /usr/bin/node /usr/local/bin/node
 
 RUN install-php-extensions \
     pcntl \
@@ -64,7 +64,7 @@ COPY . /var/www/html
 WORKDIR /var/www/html
 
 # Manually install shiki
-RUN npm install -g shiki
+RUN npm install shiki
 
 # Copy our prod script and set permissions
 COPY server/start.sh /start.sh
