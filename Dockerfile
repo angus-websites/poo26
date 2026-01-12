@@ -34,6 +34,7 @@ FROM dunglas/frankenphp:1-php8.4-alpine AS prod
 RUN apk add --no-cache \
     curl \
     nodejs \
+    npm \
     zip \
     unzip \
     git \
@@ -50,10 +51,6 @@ RUN install-php-extensions \
     zip \
     intl
 
-# Manually install shiki
-
-RUN npm install -g shiki
-
 # Copy vendor files from composer stage
 COPY --from=composer_prod /app/vendor /var/www/html/vendor
 
@@ -65,6 +62,9 @@ COPY . /var/www/html
 
 # Set workdir
 WORKDIR /var/www/html
+
+# Manually install shiki
+RUN npm install -g shiki
 
 # Copy our prod script and set permissions
 COPY server/start.sh /start.sh
