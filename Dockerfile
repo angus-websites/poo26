@@ -50,6 +50,10 @@ RUN install-php-extensions \
     zip \
     intl
 
+# Manually install shiki
+
+RUN npm install -g shiki
+
 # Copy vendor files from composer stage
 COPY --from=composer_prod /app/vendor /var/www/html/vendor
 
