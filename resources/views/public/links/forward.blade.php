@@ -2,7 +2,6 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
 <head>
     @section('title', 'Poo | Your Poo Link is Here!')
-    @section('og-image', url('assets/images/core/ogimagelink.jpg'))
     @section('description', 'You have been sent a Poo link! Click to proceed to the destination.')
     @include('partials.meta')
 </head>

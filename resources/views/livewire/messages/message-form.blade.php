@@ -50,7 +50,7 @@ new class extends Component {
                 placeholder="Your message here..."
             />
             <flux:error name="message"/>
-            <flux:description>Content is limited to 3000 characters</flux:description>
+            <flux:description>Content is limited to 5000 characters</flux:description>
         </flux:field>
 
         <div class="space-y-2">
