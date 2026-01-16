@@ -3,7 +3,7 @@
     "name": "angusgoody/poo26",
     "version": "0.0.17",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "A url shortener built with Laravel.",
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {
