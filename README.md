@@ -1,6 +1,6 @@
 <picture style="text-align: center;">
   <source media="(prefers-color-scheme: dark)" srcset="public/assets/images/logo/logo-light.png">
-  <img alt="WishWaffle Logo" src="public/assets/images/logo/logo.png" width="200">
+  <img alt="Poo26 Logo" src="public/assets/images/logo/logo.png" width="200">
 </picture>
 
 # Poo26
