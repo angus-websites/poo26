@@ -18,7 +18,7 @@ new class extends Component {
         );
 
         return [
-            'snippet' => ['required', 'string', 'max:10000'],
+            'snippet' => ['required', 'string', 'max:100000'],
             'language' => ['nullable', Rule::in($languages)],
         ];
     }
@@ -125,7 +125,7 @@ new class extends Component {
             />
             <flux:error name="snippet"/>
             <flux:description>
-                Content is limited to 10000 characters.
+                Content is limited to 100000 characters.
             </flux:description>
         </flux:field>
 
@@ -134,5 +134,3 @@ new class extends Component {
         </div>
     </form>
 </div>
-
-
