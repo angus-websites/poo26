@@ -11,8 +11,8 @@
                         x-on:click="$flux.dark = ! $flux.dark"
                     >
                         <flux:icon.moon
-                             variant="solid"
-                             x-show="! $flux.dark"
+                            variant="solid"
+                            x-show="! $flux.dark"
                         />
                         <flux:icon.sun
                             variant="solid"
@@ -23,11 +23,17 @@
                 </flux:tooltip>
             </div>
             <p x-data="{}" class="mt-8 text-base text-gray-500 md:order-1 md:mt-0 text-center">
-                &copy; {{ date('Y') }}
-                <a
-                    href="/admin"
-                    class="cursor-pointer hover:text-accent"
-                >Poo</a> | Designed by Angus Goody
+                &copy; {{ date('Y') }} Bud |
+                <span class="inline-flex items-center gap-2">Made by
+                    <a
+                        class="text-pink-500 dark:text-pink-400 inline-flex items-center gap-1"
+                        target="_blank"
+                        href="https://berrybits.dev"
+                    >
+                        <flux:icon.berry class="w-4 h-4"/>
+                        BerryBits
+                    </a>
+                </span>
             </p>
         </div>
     </x-container>
