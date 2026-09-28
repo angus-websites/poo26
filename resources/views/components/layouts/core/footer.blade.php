@@ -23,7 +23,7 @@
                 </flux:tooltip>
             </div>
             <p x-data="{}" class="mt-8 text-base text-gray-500 md:order-1 md:mt-0 text-center">
-                &copy; {{ date('Y') }} Bud |
+                &copy; {{ date('Y') }} Poo.ink |
                 <span class="inline-flex items-center gap-2">Made by
                     <a
                         class="text-pink-500 dark:text-pink-400 inline-flex items-center gap-1"
