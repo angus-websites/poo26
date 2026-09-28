@@ -3,14 +3,14 @@
 namespace App\Console\Commands;
 
 use App\Services\ApplicationVersionService;
-use Illuminate\Console\Attributes\Description;
-use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 
-#[Signature('app:clear-version-cache')]
-#[Description('Clear the cached application version value')]
+
 class ClearVersionCacheCommand extends Command
 {
+
+    protected $signature = 'app:clear-version-cache';
+    protected $description = 'Clear the cached application version value';
     /**
      * Execute the console command.
      */
