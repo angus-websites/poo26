@@ -23,6 +23,14 @@ Homestead.json
 Homestead.yaml
 Thumbs.db
 
+.mcp.json
+/.claude
+CLAUDE.md
+.github/copilot
+.github/copilot-instructions.md
+.github/skills
+AGENTS.md
+
 **/caddy
 frankenphp
 frankenphp-worker.php
