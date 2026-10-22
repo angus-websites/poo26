@@ -27,3 +27,4 @@ auth.json
 /public/storage
 /storage/*.key
 docker-compose.yaml
+.ai
